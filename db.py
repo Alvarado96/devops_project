@@ -45,3 +45,7 @@ def get_by_id(id):
 
 def insert(id, address, city, state, zip_code):
 	db[id] = {'address':address, 'city':city, 'state':state, 'zip':zip_code}
+
+
+def remove(id):
+	del db[id]
