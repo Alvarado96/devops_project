@@ -30,3 +30,10 @@ db = {
 		'zip': '44444',
 	},
 }
+
+
+def get_by_id(id):
+	if id not in db:
+		return 'ERROR: {} is not in the database'.format(id)
+	
+	return db[id]
