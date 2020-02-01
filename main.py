@@ -19,6 +19,14 @@ def get_all_properties():
 	return jsonify(res)
 
 
+@app.route('/properties/<int:id>', methods=['DELETE'])
+def delete_property(id):
+	if database.remove(id):
+		return jsonify({'message':'deleted'})
+	else:
+		return jsonify({'message':'error \'{}\' not found'.format(id)})
+
+
 @app.route('/hello')
 def hello():
 	return jsonify([{"message":"hello yourself"}])

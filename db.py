@@ -48,4 +48,8 @@ def insert(id, address, city, state, zip_code):
 
 
 def remove(id):
+	if id not in db:
+		return False
+
 	del db[id]
+	return True
