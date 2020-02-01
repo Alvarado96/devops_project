@@ -37,3 +37,7 @@ def get_by_id(id):
 		return 'ERROR: {} is not in the database'.format(id)
 	
 	return db[id]
+
+
+def insert(id, address, city, state, zip_code):
+	db[id] = {'address':address, 'city':city, 'state':state, 'zip':zip_code}
