@@ -36,12 +36,28 @@ def get_id_properties(id):
 
 @app.route('/properties', methods=['POST'])
 def insert_property():
+	errors = []
 	req_data = request.get_json()
 
 	address = req_data['address']
 	city = req_data['city']
 	state = req_data['state']
 	zip_code = req_data['zip']
+
+	if len(address) < 1 or len(address) > 200:
+		errors.append({"message":"address is not between 1 and 200 characters"})
+
+	if len(city) < 1 or len(city) > 50:
+		errors.append({"message":"city is not between 1 and 50 characters"})
+
+	if not len(state) == 2:
+		errors.append({"message":"state is not exactly two characters"})
+
+	if len(zip_code) < 5 or len(zip_code) > 10:
+		errors.append({"message":"zip is not between 5 and 10 characters"})
+
+	if errors:
+		return jsonify(errors)
 
 	database.insert(len(database.db) + 1, address, city, state, zip_code)
 
