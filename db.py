@@ -38,7 +38,7 @@ def get_all():
 
 def get_by_id(id):
 	if id not in db:
-		return 'ERROR: {} is not in the database'.format(id)
+		return 'ERROR: {} is not in the database'.format(id), 404
 	
 	return db[id]
 
