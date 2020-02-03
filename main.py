@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, request
 import db as database
+from status_codes import Status
 
 app = Flask(__name__)
 
@@ -23,7 +24,8 @@ def delete_property(id):
 	if database.remove(id):
 		return jsonify({'message':'deleted'})
 	else:
-		return jsonify({'message':'error \'{}\' not found'.format(id)})
+		rsp = jsonify({'message':'error \'{}\' not found'.format(id)})
+		return rsp, Status.NOT_FOUND.value
 
 
 @app.route('/properties/<int:id>', methods=['GET'])
@@ -31,7 +33,8 @@ def get_id_properties(id):
 	if database.get_by_id(id):
 		return jsonify(database.get_by_id(id))
 	else:
-		return jsonify({'message':'error \'{}\' not found'.format(id)}), 404
+		rsp = jsonify({'message':'error \'{}\' not found'.format(id)})
+		return rsp, Status.NOT_FOUND.value
 
 
 @app.route('/properties', methods=['POST'])
@@ -57,11 +60,11 @@ def insert_property():
 		errors.append({"message":"zip is not between 5 and 10 characters"})
 
 	if errors:
-		return jsonify(errors)
+		return jsonify(errors), Status.BAD_REQUEST.value
 
 	database.insert(len(database.db) + 1, address, city, state, zip_code)
 
-	return jsonify([{"message":"added"}])
+	return jsonify([{"message":"added"}]), Status.CREATED.value
 
 
 @app.route('/hello')
