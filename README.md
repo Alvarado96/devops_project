@@ -31,7 +31,7 @@ Deletes the property with the specified id
 * Response: {'message':'deleted'}
 
 ## Data Storage
-To keep things as simple as possible we used sqlite3 to persist the data that our API served.
+To keep things as simple as possible we use sqlite3 to persist the data that our API handles.
 Sqlite3 stores data in a single file (.db) which is stored in our repository. So all queries
 made by the API are handled by that local database file.
 
