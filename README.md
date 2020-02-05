@@ -40,3 +40,4 @@ Need flask and sqlite3 installed, then just run:
 ```
 $ python3 main.py
 ```
+Server will be running at localhost:5000
