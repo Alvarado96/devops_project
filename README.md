@@ -17,7 +17,7 @@ Returns a list of all properties
 
 ### /properties - POST
 Adds a new property to the database
-* Status Code:
+* Status Code: 201 or 400
 * Response: {'message':'added'}
 
 ### /properties/\<id\> - GET
@@ -36,3 +36,7 @@ Sqlite3 stores data in a single file (.db) which is stored in our repository. So
 made by the API are handled by that local database file.
 
 ## Running the Service
+Need flask and sqlite3 installed, then just run:
+```
+$ python3 main.py
+```
