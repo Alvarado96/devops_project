@@ -25,11 +25,29 @@ def get_all_properties():
 
 @app.route('/properties/<int:id>', methods=['DELETE'])
 def delete_property(id):
+	conn = db_sql.get_db()
+	#conn.row_factory = db_sql.dict_factory
+
+	cursor = conn.cursor()
+	cursor.execute("delete from properties where id=" + str(id))
+	conn.commit()
+	conn.close()
+	return jsonify({"messge":"deleted"})
+
+	'''
+	results = cursor.fetchall()
+	conn.close()
+	return jsonify(results)
+	'''
+
+
+	''''
 	if database.remove(id):
 		return jsonify({'message':'deleted'})
 	else:
 		rsp = jsonify({'message':'error \'{}\' not found'.format(id)})
 		return rsp, Status.NOT_FOUND.value
+	'''
 
 
 @app.route('/properties/<int:id>', methods=['GET'])
