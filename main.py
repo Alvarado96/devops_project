@@ -1,6 +1,11 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, render_template
 import db as database
+import sqlite3
+from flask import g
 from status_codes import Status
+import database as db_sql
+import json
+DATABASE = './properties.db'
 
 app = Flask(__name__)
 
@@ -30,12 +35,22 @@ def delete_property(id):
 
 @app.route('/properties/<int:id>', methods=['GET'])
 def get_id_properties(id):
+	conn = db_sql.get_db()
+	conn.row_factory = db_sql.dict_factory
+
+	cursor = conn.cursor()
+	cursor.execute("select * from properties where id=" + str(id))
+
+	results = cursor.fetchall()
+	return jsonify(results[0])
+	conn.close()
+	'''
 	if database.get_by_id(id):
 		return jsonify(database.get_by_id(id))
 	else:
 		rsp = jsonify({'message':'error \'{}\' not found'.format(id)})
 		return rsp, Status.NOT_FOUND.value
-
+	'''
 
 @app.route('/properties', methods=['POST'])
 def insert_property():
