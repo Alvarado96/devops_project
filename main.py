@@ -26,12 +26,12 @@ def get_all_properties():
 @app.route('/properties/<int:id>', methods=['DELETE'])
 def delete_property(id):
 	conn = db_sql.get_db()
-	#conn.row_factory = db_sql.dict_factory
-
 	cursor = conn.cursor()
+	
 	cursor.execute("delete from properties where id=" + str(id))
 	conn.commit()
 	conn.close()
+
 	return jsonify({"messge":"deleted"})
 
 
@@ -51,10 +51,6 @@ def get_id_properties(id):
 @app.route('/properties', methods=['POST'])
 def insert_property():
 	conn = db_sql.get_db()
-	#conn.row_factory = db_sql.dict_factory
-
-	
-	
 	
 	errors = []
 	req_data = request.get_json()
@@ -63,6 +59,7 @@ def insert_property():
 	city = req_data['city']
 	state = req_data['state']
 	zip_code = req_data['zip']
+
 	if len(address) < 1 or len(address) > 200:
 		errors.append({"message":"address is not between 1 and 200 characters"})
 
