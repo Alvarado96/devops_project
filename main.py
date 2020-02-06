@@ -50,6 +50,12 @@ def get_id_properties(id):
 
 @app.route('/properties', methods=['POST'])
 def insert_property():
+	conn = db_sql.get_db()
+	#conn.row_factory = db_sql.dict_factory
+
+	
+	
+	
 	errors = []
 	req_data = request.get_json()
 
@@ -57,7 +63,6 @@ def insert_property():
 	city = req_data['city']
 	state = req_data['state']
 	zip_code = req_data['zip']
-
 	if len(address) < 1 or len(address) > 200:
 		errors.append({"message":"address is not between 1 and 200 characters"})
 
@@ -73,7 +78,12 @@ def insert_property():
 	if errors:
 		return jsonify(errors), Status.BAD_REQUEST.value
 
-	database.insert(len(database.db) + 1, address, city, state, zip_code)
+	params = (address, city, str('zip'))
+	sql = '''insert into properties(address, city, zip) values(?,?,?)'''
+	cursor = conn.cursor()
+	cursor.execute(sql, params) 
+	conn.commit()
+	conn.close()
 
 	return jsonify([{"message":"added"}]), Status.CREATED.value
 
