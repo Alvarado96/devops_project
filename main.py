@@ -34,21 +34,6 @@ def delete_property(id):
 	conn.close()
 	return jsonify({"messge":"deleted"})
 
-	'''
-	results = cursor.fetchall()
-	conn.close()
-	return jsonify(results)
-	'''
-
-
-	''''
-	if database.remove(id):
-		return jsonify({'message':'deleted'})
-	else:
-		rsp = jsonify({'message':'error \'{}\' not found'.format(id)})
-		return rsp, Status.NOT_FOUND.value
-	'''
-
 
 @app.route('/properties/<int:id>', methods=['GET'])
 def get_id_properties(id):
