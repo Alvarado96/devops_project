@@ -12,16 +12,15 @@ app = Flask(__name__)
 
 @app.route('/properties', methods=['GET'])
 def get_all_properties():
-	res = []
-	db = database.get_all()
-	for id in db.keys():
-		res.append({
-			'id':id, 
-			'address':db[id]['address'], 
-			'zip':db[id]['zip'],
-		})
-	
-	return jsonify(res)
+	conn = db_sql.get_db()
+	conn.row_factory = db_sql.dict_factory
+
+	cursor = conn.cursor()
+	cursor.execute("select * from properties")
+
+	results = cursor.fetchall()
+	conn.close()
+	return jsonify(results)
 
 
 @app.route('/properties/<int:id>', methods=['DELETE'])
@@ -42,15 +41,9 @@ def get_id_properties(id):
 	cursor.execute("select * from properties where id=" + str(id))
 
 	results = cursor.fetchall()
-	return jsonify(results[0])
 	conn.close()
-	'''
-	if database.get_by_id(id):
-		return jsonify(database.get_by_id(id))
-	else:
-		rsp = jsonify({'message':'error \'{}\' not found'.format(id)})
-		return rsp, Status.NOT_FOUND.value
-	'''
+	return jsonify(results[0])
+	
 
 @app.route('/properties', methods=['POST'])
 def insert_property():
