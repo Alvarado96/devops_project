@@ -30,7 +30,7 @@ def select_property(property_id):
 		cur = con.cursor()
 		cur.execute(statement, property_id)
 		row = cur.fetchall()
-		return row
+		return _to_dict(cur, row)
 	except sqlite3.Error as e:
 		print('ERROR: select_property: DB error:', e)
 	except Exception as e:
@@ -49,7 +49,7 @@ def select_all_properties():
 		cur = con.cursor()
 		cur.execute(statement)
 		rows = cur.fetchall()
-		return rows
+		return _to_dict(cur, rows)
 	except sqlite3.Error as e:
 		print('ERROR: select_all_property: DB error:', e)
 	except Exception as e:
@@ -89,40 +89,13 @@ def establish_connection():
 	return con
 
 
-'''
-def to_dict(cursor, row):
-	d = {}
+def _to_dict(cursor, rows):
+	ls = []
 	for row in rows:
-		for idx, col in enumerate(cursor.description):
-			d[[col[0]] = row[idx]
-	return d
+		ls.append(_make_dicts(cursor, row))		
+	return ls
 
-    d = {}
-    for idx, col in enumerate(cursor.description):
-        d[col[0]] = row[idx]
-    return d
-'''
 
-'''
-def get_db():
-	db = getattr(g, '_database', None)
-	if db is None:
-		db = g._database = sqlite3.connect(DATABASE)
-	return db
-
-@app.teardown_appcontext
-def close_connection(exception):
-	db = getattr(g, '_database', None)
-	if db is not None:
-		db.close()
-
-def make_dicts(cursor, row):
+def _make_dicts(cursor, row):
 	return dict((cursor.description[idx][0], value)
 				for idx, value in enumerate(row))
-
-def query_db(query, args=(), one=False):
-	cur = g.db.execute(query, args)
-	rv = [dict((cur.description[idx][0], value)
-				for idx, value in enumerate(row)) for row in cur.fetchall()]
-	return (rv[0] if rv else None)
-'''

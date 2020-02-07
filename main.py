@@ -13,7 +13,6 @@ app = Flask(__name__)
 @app.route('/properties', methods=['GET'])
 def get_all_properties():
 	rows = db_sql.select_all_properties()
-	print(type(rows), type(rows[0]))
 	if not rows:
 		return jsonify({'message':'not found'})
 	return jsonify(rows)
