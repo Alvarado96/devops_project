@@ -12,31 +12,27 @@ app = Flask(__name__)
 
 @app.route('/properties', methods=['GET'])
 def get_all_properties():
-	conn = db_sql.get_db()
-	conn.row_factory = db_sql.dict_factory
+	rows = db_sql.select_all_properties()
+	print(type(rows), type(rows[0]))
+	if not rows:
+		return jsonify({'message':'not found'})
+	return jsonify(rows)
 
-	cursor = conn.cursor()
-	cursor.execute("select * from properties")
-
-	results = cursor.fetchall()
-	conn.close()
-	return jsonify(results)
-
-
+	
 @app.route('/properties/<int:id>', methods=['DELETE'])
 def delete_property(id):
-	conn = db_sql.get_db()
-	cursor = conn.cursor()
+	rows_affected = db_sql.delete_property(id)
+	if rows_affected == -1:
+		return jsonify({'message':'error'}) # error
+	elif rows_affected == 0:
+		return jsonify({'message':'not found'}) # did not find property
+	return jsonify({'message':'deleted'})
+
 	
-	cursor.execute("delete from properties where id=" + str(id))
-	conn.commit()
-	conn.close()
-
-	return jsonify({"messge":"deleted"})
-
-
 @app.route('/properties/<int:id>', methods=['GET'])
 def get_id_properties(id):
+	return jsonify({'message':'not supported'})
+
 	conn = db_sql.get_db()
 	conn.row_factory = db_sql.dict_factory
 
@@ -50,6 +46,8 @@ def get_id_properties(id):
 
 @app.route('/properties', methods=['POST'])
 def insert_property():
+	return jsonify({'message':'not supported'})
+
 	conn = db_sql.get_db()
 	
 	errors = []
