@@ -1,7 +1,6 @@
 from flask import Flask, jsonify, request, render_template
 import database as db_sql
 from status_codes import Status
-import sqlite3
 
 app = Flask(__name__)
 
