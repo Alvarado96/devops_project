@@ -1,14 +1,9 @@
 from flask import Flask, jsonify, request, render_template
-import db as database
-import sqlite3
-from flask import g
-from status_codes import Status
 import database as db_sql
-import json
-DATABASE = './properties.db'
+from status_codes import Status
+import sqlite3
 
 app = Flask(__name__)
-
 
 @app.route('/properties', methods=['GET'])
 def get_all_properties():
@@ -32,6 +27,7 @@ def delete_property(id):
 def get_id_properties(id):
 	return jsonify({'message':'not supported'})
 
+	'''
 	conn = db_sql.get_db()
 	conn.row_factory = db_sql.dict_factory
 
@@ -41,12 +37,14 @@ def get_id_properties(id):
 	results = cursor.fetchall()
 	conn.close()
 	return jsonify(results[0])
+	'''
 	
 
 @app.route('/properties', methods=['POST'])
 def insert_property():
 	return jsonify({'message':'not supported'})
 
+	'''
 	conn = db_sql.get_db()
 	
 	errors = []
@@ -73,13 +71,14 @@ def insert_property():
 		return jsonify(errors), Status.BAD_REQUEST.value
 
 	params = (address, city, str('zip'))
-	sql = '''insert into properties(address, city, zip) values(?,?,?)'''
+	sql = 'insert into properties(address, city, zip) values(?,?,?)'
 	cursor = conn.cursor()
 	cursor.execute(sql, params) 
 	conn.commit()
 	conn.close()
 
 	return jsonify([{"message":"added"}]), Status.CREATED.value
+	'''
 
 
 @app.route('/hello')
