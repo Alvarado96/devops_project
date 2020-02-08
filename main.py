@@ -14,18 +14,18 @@ app = Flask(__name__)
 def get_all_properties():
 	rows = db_sql.select_all_properties()
 	if not rows:
-		return jsonify({'message':'not found'})
-	return jsonify(rows)
+		return jsonify({'message':'not found'}), Status.NOT_FOUND.value
+	return jsonify(rows), Status.OK.value
 
 	
 @app.route('/properties/<int:id>', methods=['DELETE'])
 def delete_property(id):
 	rows_affected = db_sql.delete_property(id)
 	if rows_affected == -1:
-		return jsonify({'message':'error'}) # error
+		return jsonify({'message':'error'}), Status.SERVER_ERROR.value
 	elif rows_affected == 0:
-		return jsonify({'message':'not found'}) # did not find property
-	return jsonify({'message':'deleted'})
+		return jsonify({'message':'not found'}), Status.NOT_FOUND.value
+	return jsonify({'message':'deleted'}), Status.OK.value
 
 	
 @app.route('/properties/<int:id>', methods=['GET'])
