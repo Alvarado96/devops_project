@@ -24,8 +24,10 @@ def delete_property(id):
 	
 @app.route('/properties/<int:id>', methods=['GET'])
 def get_id_properties(id):
-	return jsonify({'message':'not supported'})
-
+	row = db_sql.select_property(str(id))
+	if not row:
+		return jsonify({'message':'not found'}), Status.NOT_FOUND.value
+	return jsonify(row), Status.OK.value
 	'''
 	conn = db_sql.get_db()
 	conn.row_factory = db_sql.dict_factory
@@ -41,8 +43,7 @@ def get_id_properties(id):
 
 @app.route('/properties', methods=['POST'])
 def insert_property():
-	return jsonify({'message':'not supported'})
-
+	return jsonify({'message':'not supported'}), Status.NOT_FOUND.value
 	'''
 	conn = db_sql.get_db()
 	
