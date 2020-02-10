@@ -28,25 +28,10 @@ def get_id_properties(id):
 	if not row:
 		return jsonify({'message':'not found'}), Status.NOT_FOUND.value
 	return jsonify(row), Status.OK.value
-	'''
-	conn = db_sql.get_db()
-	conn.row_factory = db_sql.dict_factory
-
-	cursor = conn.cursor()
-	cursor.execute("select * from properties where id=" + str(id))
-
-	results = cursor.fetchall()
-	conn.close()
-	return jsonify(results[0])
-	'''
 	
 
 @app.route('/properties', methods=['POST'])
 def insert_property():
-	return jsonify({'message':'not supported'}), Status.NOT_FOUND.value
-	'''
-	conn = db_sql.get_db()
-	
 	errors = []
 	req_data = request.get_json()
 
@@ -70,15 +55,10 @@ def insert_property():
 	if errors:
 		return jsonify(errors), Status.BAD_REQUEST.value
 
-	params = (address, city, str('zip'))
-	sql = 'insert into properties(address, city, zip) values(?,?,?)'
-	cursor = conn.cursor()
-	cursor.execute(sql, params) 
-	conn.commit()
-	conn.close()
-
+	rows_affected = db_sql.insert_property((address, city, zip_code))
+	
 	return jsonify([{"message":"added"}]), Status.CREATED.value
-	'''
+	
 
 
 @app.route('/hello')
