@@ -1,6 +1,6 @@
 # CS4783 Properties Web Service
 
-## What is used?
+## What was used?
 * Python3
 * Flask
 * Sqlite3
