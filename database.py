@@ -5,7 +5,7 @@ DATABASE = './properties.db'
 
 def insert_property(new_property):
 	con = None
-	statement = 'INSERT INTO properties(address, city, zip) VALUES(?,?,?)'
+	statement = 'INSERT INTO properties(address, state, city, zip) VALUES(?,?, ?,?)'
 	try:
 		con = establish_connection()
 		cur = con.cursor()

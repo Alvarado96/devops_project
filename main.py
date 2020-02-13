@@ -55,7 +55,7 @@ def insert_property():
 	if errors:
 		return jsonify(errors), Status.BAD_REQUEST.value
 
-	rows_affected = db_sql.insert_property((address, city, zip_code))
+	rows_affected = db_sql.insert_property((address, state, city, zip_code))
 	
 	return jsonify([{"message":"added"}]), Status.CREATED.value
 	
