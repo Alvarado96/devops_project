@@ -46,7 +46,7 @@ def select_property(property_id):
 # method handles the query for getting all entries in the database
 def select_all_properties():
 	con = None
-	statement = 'SELECT * FROM properties'
+	statement = 'SELECT id, address, zip FROM properties'
 	try:
 		con = establish_connection()
 		cur = con.cursor()
