@@ -27,7 +27,7 @@ def get_id_properties(id):
 	row = db_sql.select_property(str(id))
 	if not row:
 		return jsonify({'message':'not found'}), Status.NOT_FOUND.value
-	return jsonify(row), Status.OK.value
+	return jsonify(row[0]), Status.OK.value
 	
 
 @app.route('/properties', methods=['POST'])
