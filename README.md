@@ -13,7 +13,7 @@
 ### /properties - GET
 Returns a list of all properties
 * Status Code: 200
-* Response: \[{'id':id,'address':address,'zip':zip}, ...\]
+* Response: \[{'id':id,'address':address,'city':city,'state':state,zip':zip}, ...\]
 
 ### /properties - POST
 Adds a new property to the database
@@ -23,7 +23,7 @@ Adds a new property to the database
 ### /properties/\<id\> - GET
 Gets a property with the specified id
 * Status Code: 200 or 404
-* Response: {'id':id,'address':address,'zip':zip}
+* Response: {'id':id,'address':address,'city':city,'state':state,zip':zip}
 
 ### /properties/\<id\> - DELETE
 Deletes the property with the specified id
