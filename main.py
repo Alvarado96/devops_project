@@ -4,6 +4,7 @@ from status_codes import Status
 
 app = Flask(__name__)
 
+# get_all_properties() returns all rows in the database in json form
 @app.route('/properties', methods=['GET'])
 def get_all_properties():
 	rows = db_sql.select_all_properties()
@@ -11,7 +12,8 @@ def get_all_properties():
 		return jsonify({'message':'not found'}), Status.NOT_FOUND.value
 	return jsonify(rows), Status.OK.value
 
-	
+
+# delete_property(id) removes a row in the database specified by the id
 @app.route('/properties/<int:id>', methods=['DELETE'])
 def delete_property(id):
 	rows_affected = db_sql.delete_property(id)
@@ -21,15 +23,17 @@ def delete_property(id):
 		return jsonify({'message':'not found'}), Status.NOT_FOUND.value
 	return jsonify({'message':'deleted'}), Status.OK.value
 
-	
+
+# get_id_properties(id) returns a row in json form specified by the id
 @app.route('/properties/<int:id>', methods=['GET'])
 def get_id_properties(id):
 	row = db_sql.select_property(str(id))
 	if not row:
 		return jsonify({'message':'not found'}), Status.NOT_FOUND.value
 	return jsonify(row[0]), Status.OK.value
-	
 
+	
+# insert_property() inserts a new entry into the database
 @app.route('/properties', methods=['POST'])
 def insert_property():
 	errors = []
@@ -59,8 +63,8 @@ def insert_property():
 	
 	return jsonify([{"message":"added"}]), Status.CREATED.value
 	
-
-
+	
+# hello() function created for testing purposes
 @app.route('/hello')
 def hello():
 	return jsonify([{"message":"hello yourself"}])

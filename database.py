@@ -3,6 +3,7 @@ import sys
 
 DATABASE = './properties.db'
 
+# method used to handle inserting a new query entry
 def insert_property(new_property):
 	con = None
 	statement = 'INSERT INTO properties(address, state, city, zip) VALUES(?,?, ?,?)'
@@ -22,6 +23,7 @@ def insert_property(new_property):
 	return -1
 
 
+# method returns an entry specified by the id in dictionary form
 def select_property(property_id):
 	con = None
 	statement = 'SELECT * FROM properties WHERE id=?'
@@ -41,6 +43,7 @@ def select_property(property_id):
 	return None
 
 
+# method handles the query for getting all entries in the database
 def select_all_properties():
 	con = None
 	statement = 'SELECT * FROM properties'
@@ -60,6 +63,7 @@ def select_all_properties():
 	return None
 
 
+# method handles the query for deleting an entry specified by the id
 def delete_property(property_id):
 	con = None
 	statement = 'DELETE FROM properties WHERE id=?'
@@ -79,6 +83,7 @@ def delete_property(property_id):
 	return -1
 
 
+# method connects to the database file in sqlite3
 def establish_connection():
 	con = None
 	try:
@@ -89,13 +94,15 @@ def establish_connection():
 	return con
 
 
+# converts database entry to dictionary
 def _to_dict(cursor, rows):
 	ls = []
 	for row in rows:
 		ls.append(_make_dicts(cursor, row))		
 	return ls
+	
 
-
+# returns a list of dictionarys
 def _make_dicts(cursor, row):
 	return dict((cursor.description[idx][0], value)
 				for idx, value in enumerate(row))
