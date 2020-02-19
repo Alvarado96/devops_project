@@ -14,8 +14,11 @@ def get_all_properties():
 
 
 # delete_property(id) removes a row in the database specified by the id
-@app.route('/properties/<int:id>', methods=['DELETE'])
+@app.route('/properties/<string:id>', methods=['DELETE'])
 def delete_property(id):
+	if not is_integer(id):
+		return jsonify({'message':'id not an integer'}), Status.BAD_REQUEST.value
+	
 	rows_affected = db_sql.delete_property(id)
 	if rows_affected == -1:
 		return jsonify({'message':'error'}), Status.SERVER_ERROR.value
@@ -25,8 +28,11 @@ def delete_property(id):
 
 
 # get_id_properties(id) returns a row in json form specified by the id
-@app.route('/properties/<int:id>', methods=['GET'])
+@app.route('/properties/<string:id>', methods=['GET'])
 def get_id_properties(id):
+	if not is_integer(id):
+		return jsonify({'message':'id not an integer'}), Status.BAD_REQUEST.value
+
 	row = db_sql.select_property(str(id))
 	if not row:
 		return jsonify({'message':'not found'}), Status.NOT_FOUND.value
@@ -68,6 +74,15 @@ def insert_property():
 @app.route('/hello')
 def hello():
 	return jsonify([{"message":"hello yourself"}])
+
+
+# Determines if the given ID is an integer or not
+def is_integer(id):
+	try:
+		int(id)
+		return True
+	except ValueError:
+		return False
 
 
 if __name__ == '__main__':
