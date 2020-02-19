@@ -18,6 +18,9 @@ def get_all_properties():
 def delete_property(id):
 	if not is_integer(id):
 		return jsonify({'message':'id not an integer'}), Status.BAD_REQUEST.value
+
+	if is_invalid_or_missing_key(request):
+		return jsonify({'message':'missing or invalid key'}), Status.UNAUTHORIZED.value
 	
 	rows_affected = db_sql.delete_property(id)
 	if rows_affected == -1:
@@ -83,6 +86,14 @@ def is_integer(id):
 		return True
 	except ValueError:
 		return False
+
+
+# Determines if the given request contains the correct API key
+def is_invalid_or_missing_key(req):
+	if 'Api-Key' not in req.headers:
+		return True
+
+	return req.headers['Api-Key'] != 'cs4783FTW'
 
 
 if __name__ == '__main__':
