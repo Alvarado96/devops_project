@@ -45,6 +45,9 @@ def get_id_properties(id):
 # insert_property() inserts a new entry into the database
 @app.route('/properties', methods=['POST'])
 def insert_property():
+	if is_invalid_or_missing_key(request):
+		return jsonify({'message':'missing or invalid key'}), Status.UNAUTHORIZED.value
+
 	errors = []
 	req_data = request.get_json()
 
@@ -71,7 +74,40 @@ def insert_property():
 	rows_affected = db_sql.insert_property((address, state, city, zip_code))
 	
 	return jsonify([{"message":"added"}]), Status.CREATED.value
-	
+
+
+# put_id(id) updates an entry in the database
+@app.route('/properties/<string:id>', methods=['PUT'])
+def put_id_properties(id):
+	if not is_integer(id):
+		return jsonify({'message':'id not an integer'}), Status.BAD_REQUEST.value
+
+	if is_invalid_or_missing_key(request):
+		return jsonify({'message':'missing or invalid key'}), Status.UNAUTHORIZED.value
+
+	req_data = request.get_json()
+	address = ''
+	city = ''
+	state = ''
+	zip_code = ''
+
+	if req_data and 'address' in req_data:
+		address = req_data['address']
+	if req_data and 'city' in req_data:
+		city = req_data['city']
+	if req_data and 'state' in req_data:
+		state = req_data['state']
+	if req_data and 'zip' in req_data:
+		zip_code = req_data['zip']
+
+	row = db_sql.update_property(id, address, city, state, zip_code)
+
+	if not row:
+		return jsonify([{"message":"not found"}]), Status.NOT_FOUND.value
+
+	if row:
+		return jsonify([{"message":"updated"}]), Status.OK.value
+
 	
 # hello() function created for testing purposes
 @app.route('/hello')
