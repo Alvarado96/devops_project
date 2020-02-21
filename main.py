@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, request
 import database as db_sql
 from status_codes import Status
+import sys
 
 app = Flask(__name__)
 
@@ -133,4 +134,15 @@ def is_invalid_or_missing_key(req):
 
 
 if __name__ == '__main__':
-	app.run(debug=True)
+	if len(sys.argv) != 2:
+		print('Usage: %s [http/https]' % (sys.argv[0]))
+		print('\tExample:\n\t$ python3 main.py https')
+		sys.exit(1)
+
+	mode = sys.argv[1]
+	if mode != 'http' and mode != 'https':
+		print('ERROR: Invalid protocol: %s' % (mode))
+		sys.exit(1)
+
+	print('Using %s protocol...' % (mode))
+	#app.run(debug=False)
