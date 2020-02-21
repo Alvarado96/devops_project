@@ -36,8 +36,16 @@ Sqlite3 stores data in a single file (.db) which is stored in our repository. So
 made by the API are handled by that local database file.
 
 ## Running the Service
-Need flask and sqlite3 installed, then just run:
+Need flask and sqlite3 installed.
+
+To run just using http:
 ```
-$ python3 main.py
+$ python3 main.py http
 ```
+
+To run using https:
+```
+$ python3 main.py https
+```
+
 Server will be running at localhost:5000
