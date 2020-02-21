@@ -134,15 +134,20 @@ def is_invalid_or_missing_key(req):
 
 
 if __name__ == '__main__':
-	if len(sys.argv) != 2:
+	mode = 'http'
+	if len(sys.argv) > 2:
 		print('Usage: %s [http/https]' % (sys.argv[0]))
 		print('\tExample:\n\t$ python3 main.py https')
 		sys.exit(1)
 
-	mode = sys.argv[1]
-	if mode != 'http' and mode != 'https':
-		print('ERROR: Invalid protocol: %s' % (mode))
-		sys.exit(1)
+	if len(sys.argv) == 2:
+		mode = sys.argv[1]
+		if mode != 'http' and mode != 'https':
+			print('ERROR: Invalid protocol: %s' % (mode))
+			sys.exit(1)
 
 	print('Using %s protocol...' % (mode))
-	#app.run(debug=False)
+	if mode == 'http':
+		app.run(debug=False)	
+	elif mode == 'https':
+		print('https not supported yet')
