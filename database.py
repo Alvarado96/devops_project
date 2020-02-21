@@ -22,6 +22,33 @@ def insert_property(new_property):
 			con.close()
 	return -1
 
+	
+# method updates an entry in the database
+def update_property(property_id, address, city, state, zip_code):
+	con = None
+	row_cnt = 0
+	con = establish_connection()
+	cur = con.cursor()
+
+	if address:
+		statement = 'UPDATE properties set address=(?) where id=(?)'
+		row_cnt = cur.execute(statement, (address, property_id))
+
+	if city:
+		statement = 'UPDATE properties set city=(?) where id=(?)'
+		row_cnt = cur.execute(statement, (city, property_id))
+
+	if state:
+		statement = 'UPDATE properties set state=(?) where id=(?)'
+		row_cnt = cur.execute(statement, (state, property_id))
+
+	if zip_code:
+		statement = 'UPDATE properties set zip=(?) where id=(?)'
+		row_cnt = cur.execute(statement, (zip_code, property_id))
+
+	con.commit()
+	return row_cnt
+	
 
 # method returns an entry specified by the id in dictionary form
 def select_property(property_id):
