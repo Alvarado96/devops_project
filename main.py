@@ -150,4 +150,5 @@ if __name__ == '__main__':
 	if mode == 'http':
 		app.run(debug=False)	
 	elif mode == 'https':
-		print('https not supported yet')
+		app.run(ssl_context=('certs/localcert.pem', 'certs/localkey.pem'), 
+				debug=False)
