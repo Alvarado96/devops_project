@@ -2,6 +2,7 @@ from flask import Flask, jsonify, request
 import database as db_sql
 from status_codes import Status
 import sys
+import argparse
 
 app = Flask(__name__)
 
@@ -134,21 +135,18 @@ def is_invalid_or_missing_key(req):
 
 
 if __name__ == '__main__':
-	mode = 'http'
-	if len(sys.argv) > 2:
-		print('Usage: %s [http/https]' % (sys.argv[0]))
-		print('\tExample:\n\t$ python3 main.py https')
-		sys.exit(1)
-
-	if len(sys.argv) == 2:
-		mode = sys.argv[1]
-		if mode != 'http' and mode != 'https':
-			print('ERROR: Invalid protocol: %s' % (mode))
-			sys.exit(1)
-
-	print('Using %s protocol...' % (mode))
-	if mode == 'http':
-		app.run(debug=False)	
-	elif mode == 'https':
+	parser = argparse.ArgumentParser(description='Web service')
+	parser.add_argument('-i', type=str, default='127.0.0.1', dest='host', 
+						help='IP of service (default: localhost')
+	parser.add_argument('-p', type=int, default=12185, dest='port', 
+						help='Port of service (default: 12185)')
+	parser.add_argument('-m', type=str, default='http', dest='mode', 
+						choices=['http', 'https'],
+						help='Protocal of service (default: http)')
+	
+	args = parser.parse_args()
+	if args.mode == 'http':
+		app.run(host=args.host, port=args.port, debug=False)
+	else:
 		app.run(ssl_context=('certs/localcert.pem', 'certs/localkey.pem'), 
-				debug=False)
+				host=args.host, port=args.port, debug=False)
