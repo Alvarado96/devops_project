@@ -1,10 +1,27 @@
 from flask import Flask, jsonify, request
+from flask_swagger_ui import get_swaggerui_blueprint
 import database as db_sql
 from status_codes import Status
 import sys
 import argparse
 
 app = Flask(__name__)
+
+@app.route('/static/<path:path>')
+def send_static(path):
+	return send_from_directory('static', path)
+
+SWAGGER_URL = '/swagger'
+API_URL = '/static/swagger.json'
+swaggerui_blueprint = get_swaggerui_blueprint(
+	SWAGGER_URL,
+	API_URL,
+	config={
+		'app_name': "Devop Project"
+	}
+)
+app.register_blueprint(swaggerui_blueprint, url_prefix=SWAGGER_URL)
+
 
 # get_all_properties() returns all rows in the database in json form
 @app.route('/properties', methods=['GET'])
