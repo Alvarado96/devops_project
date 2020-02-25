@@ -11,5 +11,36 @@
 			"name": "MIT",
 			"url": "https://opensource.org/licenses/MIT"
 		}
+	},
+	"components": {
+		"schemas": {
+			
+			"propertiesSchema": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "string"
+					},
+					"address": {
+						"type": "string",
+						"format": "string"
+					},
+					"city": {
+						"type": "string",
+						"format": "string"
+					},
+					"state": {
+						"type": "string",
+						"format": "string"
+					},
+					"zip": {
+						"type": "string",
+						"format": "string"
+					}
+				}
+			},
+			
+		}
 	}
 }
