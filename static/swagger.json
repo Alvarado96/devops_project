@@ -12,6 +12,35 @@
 			"url": "https://opensource.org/licenses/MIT"
 		}
 	},
+	"servers": [
+		{
+			"url": "/"
+		}
+	],
+	"tags": [
+		{
+			"name": "Properties Request",
+			"description": "Example API for Properties requests"
+		}
+	],
+	"paths": {
+		"/properties": {
+			"get": {
+				"tags": [
+					"Properties Request"
+				],
+				"summary": "Returns entries in properties table",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/components/schemas/propertiesSchema"
+						}
+					}
+				}
+			}
+		}
+	},
 	"components": {
 		"schemas": {
 			
