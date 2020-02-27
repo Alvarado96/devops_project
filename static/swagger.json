@@ -39,11 +39,59 @@
 					}
 				}
 			}
+		},
+		"/properties/{id}": {
+			"parameters": [
+				{
+					"name": "id",
+					"in": "path",
+					"required": true,
+					"description": "ID of the cat that we want to match",
+					"type": "number"
+				}
+			],
+			"get": {
+				"tags": [
+					"Properties Request"
+				],
+				"summary": "Returns an entry in properties table",
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"description": "Book Request id",
+						"schema": {
+							"$ref": "#/components/schemas/id"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/components/schemas/propertiesSchema"
+						}
+					},
+					"400": {
+						"description": "Failed. Misunderstood Request."
+					},
+					"404": {
+						"description": "Failed. Property request not found."
+					}
+				}
+			}
 		}
 	},
 	"components": {
 		"schemas": {
-			
+			"id": {
+				"properties": {
+					"uuid": {
+						"type": "number"
+					}
+				}
+			},
 			"propertiesSchema": {
 				"type": "object",
 				"properties": {
