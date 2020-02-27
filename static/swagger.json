@@ -38,12 +38,125 @@
 						}
 					}
 				}
+			},
+			"post": {
+				"tags": [
+					"Properties Request"
+				],
+				"summary": "Create a new property request",
+				"parameters": [
+					{
+						"in": "header",
+						"name": "Api-Key",
+						"schema": {
+							"type": "string",
+							"format": "string"
+						},
+						"required": true
+					}
+				],
+				"requestBody": {
+					"description": "Property Request Post Object",
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/propertyRequestPostBody"
+							}
+						}
+					}
+				},
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/components/schemas/id"
+						}
+					},
+					"400": {
+						"description": "Failed. Bad post data."
+					}
+				}
+			}
+		},
+
+		"/properties/{id}": {
+			"parameters": [
+				{
+					"name": "id",
+					"in": "path",
+					"required": true,
+					"description": "ID of the cat that we want to match",
+					"type": "number"
+				}
+			],
+			"get": {
+				"tags": [
+					"Properties Request"
+				],
+				"summary": "Returns an entry in properties table",
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"description": "Book Request id",
+						"schema": {
+							"$ref": "#/components/schemas/id"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/components/schemas/propertiesSchema"
+						}
+					},
+					"400": {
+						"description": "Failed. Misunderstood Request."
+					},
+					"404": {
+						"description": "Failed. Property request not found."
+					}
+				}
 			}
 		}
 	},
 	"components": {
 		"schemas": {
-			
+			"id": {
+				"properties": {
+					"uuid": {
+						"type": "number"
+					}
+				}
+			},
+			"propertyRequestPostBody": {
+				"type": "object",
+				"properties": {
+					"address": {
+						"type": "string",
+						"format": "string"
+					},
+					"city": {
+						"type": "string",
+						"format": "string"
+					},
+					"state": {
+						"type": "string",
+						"format": "string"
+					},
+					"zip": {
+						"type": "string",
+						"format": "string"
+					}
+
+				}
+			},
 			"propertiesSchema": {
 				"type": "object",
 				"properties": {
@@ -69,7 +182,14 @@
 					}
 				}
 			},
-			
+
+		},
+		"securitySchemas": {
+			"ApiKeyAuth": {
+				"type": "apiKey",
+				"in": "header",
+				"name": "Api-Key"
+			}
 		}
 	}
 }
