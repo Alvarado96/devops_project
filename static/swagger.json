@@ -174,9 +174,50 @@
 						"description": "Failed. Bad post data."
 					}
 				}
+			},
+			"delete": {
+				"summary": "Delete Property Request by ID",
+				"tags": [
+					"Properties Request"
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"description": "Property Request Id",
+						"schema": {
+							"$ref": "#/components/schemas/id"
+						}
+					},
+					{
+						"in": "header",
+						"name": "Api-Key",
+						"schema": {
+							"type": "string",
+							"format": "string"
+						},
+						"required": true
+					}
+				],
+				"responses": {
+					"204": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/components/schemas/id"
+						}
+					},
+					"400": {
+						"description": "Failed. Misunderstood Request."
+					},
+					"404": {
+						"description": "Failed. Book Request not found."
+					}
+				}
 			}
 		}
 	},
+
 	"components": {
 		"schemas": {
 			"id": {
