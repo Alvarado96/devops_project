@@ -160,10 +160,14 @@ if __name__ == '__main__':
 	parser.add_argument('-m', type=str, default='http', dest='mode', 
 						choices=['http', 'https'],
 						help='Protocal of service (default: http)')
+	parser.add_argument('-c', type=str, default='certs/localcert.pem',
+						dest=cert, help='Path to https certitficate')
+	parser.add_argument('-k', type=str, default='certs/localkey.pem',
+						dest=key, help='Path to https key')
 	
 	args = parser.parse_args()
 	if args.mode == 'http':
 		app.run(host=args.host, port=args.port, debug=False)
 	else:
-		app.run(ssl_context=('certs/localcert.pem', 'certs/localkey.pem'), 
+		app.run(ssl_context=(args.cert, args.key), 
 				host=args.host, port=args.port, debug=False)
