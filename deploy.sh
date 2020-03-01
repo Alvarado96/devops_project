@@ -8,12 +8,7 @@ scp devops.zip ddd233@cs47831.fulgentcorp.com:~/ || exit 1
 
 # Connects to the server via ssh and sets up the new code
 ssh ddd233@cs47831.fulgentcorp.com << EOF
-	mv ~/devops.zip ~/assig2/
-	cd ~/assig2
-	rm *.py *.db static/swagger.json
-	rm -rf __pycache__
-	unzip devops.zip
-	rm devops.zip
+	bash ~/upgrade.sh
 EOF
 
 # Remove the zip file on local system
