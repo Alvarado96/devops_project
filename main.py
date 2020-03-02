@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, request
+from flask_cors import CORS, cross_origin
 from flask_swagger_ui import get_swaggerui_blueprint
 import database as db_sql
 from status_codes import Status
@@ -6,7 +7,9 @@ import sys
 import argparse
 
 app = Flask(__name__)
+cors = CORS(app, resources={r"/properties/*": {"origins": "*"}})
 
+# swagger ui path
 @app.route('/static/<path:path>')
 def send_static(path):
 	return send_from_directory('static', path)
@@ -63,6 +66,7 @@ def get_id_properties(id):
 	
 # insert_property() inserts a new entry into the database
 @app.route('/properties', methods=['POST'])
+@cross_origin(headers=['Content-Type', 'Api-Key'])
 def insert_property():
 	if is_invalid_or_missing_key(request):
 		return jsonify({'message':'missing or invalid key'}), Status.UNAUTHORIZED.value
