@@ -165,9 +165,9 @@ if __name__ == '__main__':
 						choices=['http', 'https'],
 						help='Protocal of service (default: http)')
 	parser.add_argument('-c', type=str, default='certs/localcert.pem',
-						dest=cert, help='Path to https certitficate')
+						dest='cert', help='Path to https certitficate')
 	parser.add_argument('-k', type=str, default='certs/localkey.pem',
-						dest=key, help='Path to https key')
+						dest='key', help='Path to https key')
 	
 	args = parser.parse_args()
 	if args.mode == 'http':
