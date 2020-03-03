@@ -7,7 +7,7 @@ import sys
 import argparse
 
 app = Flask(__name__)
-cors = CORS(app, resources={r"/properties/*": {"origins": "*"}})
+CORS(app)
 
 # swagger ui path
 @app.route('/static/<path:path>')
@@ -15,7 +15,7 @@ def send_static(path):
 	return send_from_directory('static', path)
 
 SWAGGER_URL = '/swagger'
-API_URL = '/static/swagger.json'
+API_URL = '/static/swagger.yaml'
 swaggerui_blueprint = get_swaggerui_blueprint(
 	SWAGGER_URL,
 	API_URL,
@@ -66,7 +66,6 @@ def get_id_properties(id):
 	
 # insert_property() inserts a new entry into the database
 @app.route('/properties', methods=['POST'])
-@cross_origin(headers=['Content-Type', 'Api-Key'])
 def insert_property():
 	if is_invalid_or_missing_key(request):
 		return jsonify({'message':'missing or invalid key'}), Status.UNAUTHORIZED.value

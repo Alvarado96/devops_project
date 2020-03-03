@@ -211,7 +211,7 @@
 						"description": "Failed. Misunderstood Request."
 					},
 					"404": {
-						"description": "Failed. Book Request not found."
+						"description": "Failed. Property Request not found."
 					}
 				}
 			}

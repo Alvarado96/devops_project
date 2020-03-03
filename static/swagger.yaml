@@ -1,0 +1,169 @@
+openapi: 3.0.0
+info:
+  description: devops
+  version: 1.0.0
+  title: Devops-flask-project
+  contact:
+    email: something@gmail.com
+  license:
+    name: MIT
+    url: 'https://opensource.org/licenses/MIT'
+servers:
+  - url: http://127.0.0.1:12185/
+  - url: https://127.0.0.1:12185/
+tags:
+  - name: Properties Request
+    description: Example API for Properties requests
+
+paths:
+  /properties:
+    get:
+      tags:
+        - Properties Request
+      summary: Returns entries in properties table
+      responses:
+        '200':
+          description: 'OK'
+          
+    post:
+      tags:
+        - Properties Request
+      summary: Create a new property request
+      security:
+        - ApiKeyAuth: []
+      requestBody:
+        description: Property Request Post Object
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/propertyRequestPostBody'
+      
+      responses:
+        '200':
+          description: OK
+          
+        '400':
+          description: Failed. Bad post data.
+  '/properties/{id}':
+    parameters:
+      - name: id
+        in: path
+        required: true
+        description: ID of the cat that we want to match
+        schema:
+          $ref: '#/components/schemas/id'
+    get:
+      tags:
+        - Properties Request
+      summary: Returns an entry in properties table
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: Property Request id
+          schema:
+            $ref: '#/components/schemas/id'
+      responses:
+        '200':
+          description: OK
+          
+        '400':
+          description: Failed. Misunderstood Request.
+        '404':
+          description: Failed. Property request not found.
+    put:
+      summary: edit a property request by ID
+      tags:
+        - Properties Request
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: Property Request id
+          schema:
+            $ref: '#/components/schemas/id'
+        
+      requestBody:
+        description: Property Request Object
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/propertiesSchema'
+      
+      responses:
+        '200':
+          description: OK
+          
+        '400':
+          description: Failed. Bad post data.
+    delete:
+      summary: Delete Property Request by ID
+      tags:
+        - Properties Request
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: Property Request Id
+          schema:
+            $ref: '#/components/schemas/id'
+        
+      responses:
+        '204':
+          description: OK
+          
+        '400':
+          description: Failed. Misunderstood Request.
+        '404':
+          description: Failed. Property Request not found.
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Api-Key
+  schemas:
+    id:
+      properties:
+        uuid:
+          type: number
+    propertyRequestPostBody:
+      type: object
+      properties:
+        address:
+          type: string
+          format: string
+        city:
+          type: string
+          format: string
+        state:
+          type: string
+          format: string
+        zip:
+          type: string
+          format: string
+    propertiesSchema:
+      type: object
+      properties:
+        id:
+          type: number
+          format: string
+        address:
+          type: string
+          format: string
+        city:
+          type: string
+          format: string
+        state:
+          type: string
+          format: string
+        zip:
+          type: string
+          format: string
+  
