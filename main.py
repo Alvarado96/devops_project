@@ -56,7 +56,7 @@ def get_id_properties(id):
 	if not is_integer(id):
 		return jsonify({'message':'id not an integer'}), Status.BAD_REQUEST.value
 
-	row = db_sql.select_property(str(id))
+	row = db_sql.select_property(id)
 	if not row:
 		return jsonify({'message':'not found'}), Status.NOT_FOUND.value
 	return jsonify(row[0]), Status.OK.value

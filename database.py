@@ -57,7 +57,7 @@ def select_property(property_id):
 	try:
 		con = establish_connection()
 		cur = con.cursor()
-		cur.execute(statement, property_id)
+		cur.execute(statement, (property_id,))
 		row = cur.fetchall()
 		return _to_dict(cur, row)
 	except sqlite3.Error as e:
