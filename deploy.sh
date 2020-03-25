@@ -4,10 +4,10 @@
 zip devops.zip *.py *.db static/swagger.yaml || exit 1
 
 # Uses scp to move the zip file to the server
-scp devops.zip ddd233@cs47831.fulgentcorp.com:~/ || exit 1
+scp devops.zip ddd233@cs47832.fulgentcorp.com:~/ || exit 1
 
 # Connects to the server via ssh and sets up the new code
-ssh ddd233@cs47831.fulgentcorp.com << EOF
+ssh ddd233@cs47832.fulgentcorp.com << EOF
 	bash ~/upgrade.sh
 EOF
 
