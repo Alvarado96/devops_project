@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, request
+from flask_cors import CORS
 from flask_swagger_ui import get_swaggerui_blueprint
 import database as db_sql
 from status_codes import Status
@@ -6,6 +7,7 @@ import sys
 import argparse
 
 app = Flask(__name__)
+CORS(app)
 
 # swagger ui path
 @app.route('/static/<path:path>')
