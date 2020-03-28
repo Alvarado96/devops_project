@@ -13,6 +13,7 @@ test_scripts=(
 	test_delete.sh
 )
 
+# Run all tests, stopping if one returns a nonzero error code
 for test_script in "${test_scripts[@]}"; do
 	bash "$test_script" || { echo "STOPPING TEST..." ; exit 1; }
 done
