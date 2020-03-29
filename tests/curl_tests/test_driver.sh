@@ -20,6 +20,13 @@ if [ "$#" -ne 2 ]; then
 	exit 1
 fi
 
+# Make hostname and port number available to other test scripts
+host_name="$1"
+export host_name
+
+port_number="$2"
+export port_number
+
 # Run all tests, stopping if one returns a nonzero error code
 for test_script in "${test_scripts[@]}"; do
 	bash "$test_script" || { echo "STOPPING TEST..." ; exit 1; }
