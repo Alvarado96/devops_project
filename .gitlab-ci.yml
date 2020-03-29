@@ -9,6 +9,7 @@ build-app:
   stage: build
   script:
     - echo "Hello build"
+    - ls
 
 unit-test:
   stage: unit_test
