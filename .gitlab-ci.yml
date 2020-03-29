@@ -9,7 +9,7 @@ build-app:
   stage: build
   script:
     - echo "Hello build"
-    - python --version
+    - python3 --version
 
 unit-test:
   stage: unit_test
