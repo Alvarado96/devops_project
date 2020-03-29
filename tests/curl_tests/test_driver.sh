@@ -13,6 +13,13 @@ test_scripts=(
 	test_delete.sh
 )
 
+if [ "$#" -ne 2 ]; then
+	echo "Usage: $0 [host-name] [port-number]"
+	echo ""
+	echo "Example: $0 fulgentcorp.com 8080"
+	exit 1
+fi
+
 # Run all tests, stopping if one returns a nonzero error code
 for test_script in "${test_scripts[@]}"; do
 	bash "$test_script" || { echo "STOPPING TEST..." ; exit 1; }
