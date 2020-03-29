@@ -1,23 +1,24 @@
 ---
 stages:
   - build
-  - test
+  - unit_test
+  - curl_test
   - deploy
 
 build-app:
-  stage : build
+  stage: build
   script:
     - echo "Hello build"
 
 unit-test:
-  stage : test
-  script :
+  stage: unit_test
+  script:
     - echo "Hello unit-test"
 
 curl-test:
-  stage : test
-  script : echo "Hello curl-test"
+  stage: curl_test
+  script: echo "Hello curl-test"
 
-deploy-app :
-  stage : deploy
-  script : echo "Hello deploy-app"
+deploy-app:
+  stage: deploy
+  script: echo "Hello deploy-app"
