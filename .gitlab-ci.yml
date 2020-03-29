@@ -10,7 +10,7 @@ build-app:
   script:
     - echo "Hello build"
     - python3 --version
-    - sqlite3 -version
+    - sqlite -version
 
 unit-test:
   stage: unit_test
