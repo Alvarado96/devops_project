@@ -3,14 +3,26 @@
 #
 # Parameters:
 #		1 -> HTTP method
-#		2 -> Resource path
+#		2 -> URL to resource
 #		3 -> HTTP headers
 #		4 -> HTTP body
 #
 # Returns:
-#		0 if curl was successful, 1 otherwise
+#		0 if curl was successful, nonzero otherwise
 function curl_http {
-	return 0	
+	local method="$1"
+	local url="$2"
+	local headers="$3"
+	local body="$4"
+
+	curl -s                  \
+	     --request "$method" \
+	     --header "$header"  \
+	     --data "$body"      \
+	     "$url"              \
+			 > resp.json
+	
+	return $?
 }
 
 # Runs the curl command using HTTPS on the given parameters and outputs the
