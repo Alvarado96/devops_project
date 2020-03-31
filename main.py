@@ -2,7 +2,9 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 from flask_swagger_ui import get_swaggerui_blueprint
 import database as db_sql
-from status_codes import Status
+from status_codes import OK, CREATED, BAD_REQUEST,  \
+                         UNAUTHORIZED, NOT_FOUND,   \
+												 SERVER_ERROR
 import sys
 import argparse
 
@@ -31,44 +33,44 @@ app.register_blueprint(swaggerui_blueprint, url_prefix=SWAGGER_URL)
 def get_all_properties():
 	rows = db_sql.select_all_properties()
 	if not rows:
-		return jsonify({'message':'not found'}), Status.NOT_FOUND.value
-	return jsonify(rows), Status.OK.value
+		return jsonify({'message':'not found'}), NOT_FOUND
+	return jsonify(rows), OK
 
 
 # delete_property(id) removes a row in the database specified by the id
 @app.route('/properties/<string:id>', methods=['DELETE'])
 def delete_property(id):
 	if not is_integer(id):
-		return jsonify({'message':'id not an integer'}), Status.BAD_REQUEST.value
+		return jsonify({'message':'id not an integer'}), BAD_REQUEST
 
 	if is_invalid_or_missing_key(request):
-		return jsonify({'message':'missing or invalid key'}), Status.UNAUTHORIZED.value
+		return jsonify({'message':'missing or invalid key'}), UNAUTHORIZED
 	
 	rows_affected = db_sql.delete_property(id)
 	if rows_affected == -1:
-		return jsonify({'message':'error'}), Status.SERVER_ERROR.value
+		return jsonify({'message':'error'}), SERVER_ERROR
 	elif rows_affected == 0:
-		return jsonify({'message':'not found'}), Status.NOT_FOUND.value
-	return jsonify({'message':'deleted'}), Status.OK.value
+		return jsonify({'message':'not found'}), NOT_FOUND
+	return jsonify({'message':'deleted'}), OK
 
 
 # get_id_properties(id) returns a row in json form specified by the id
 @app.route('/properties/<string:id>', methods=['GET'])
 def get_id_properties(id):
 	if not is_integer(id):
-		return jsonify({'message':'id not an integer'}), Status.BAD_REQUEST.value
+		return jsonify({'message':'id not an integer'}), BAD_REQUEST
 
 	row = db_sql.select_property(id)
 	if not row:
-		return jsonify({'message':'not found'}), Status.NOT_FOUND.value
-	return jsonify(row[0]), Status.OK.value
+		return jsonify({'message':'not found'}), NOT_FOUND
+	return jsonify(row[0]), OK
 
 	
 # insert_property() inserts a new entry into the database
 @app.route('/properties', methods=['POST'])
 def insert_property():
 	if is_invalid_or_missing_key(request):
-		return jsonify({'message':'missing or invalid key'}), Status.UNAUTHORIZED.value
+		return jsonify({'message':'missing or invalid key'}), UNAUTHORIZED
 
 	errors = []
 	req_data = request.get_json()
@@ -91,21 +93,21 @@ def insert_property():
 		errors.append({"message":"zip is not between 5 and 10 characters"})
 
 	if errors:
-		return jsonify(errors), Status.BAD_REQUEST.value
+		return jsonify(errors), BAD_REQUEST
 
 	rows_affected = db_sql.insert_property((address, state, city, zip_code))
 	
-	return jsonify([{"message":"added"}]), Status.CREATED.value
+	return jsonify([{"message":"added"}]), CREATED
 
 
 # put_id(id) updates an entry in the database
 @app.route('/properties/<string:id>', methods=['PUT'])
 def put_id_properties(id):
 	if not is_integer(id):
-		return jsonify({'message':'id not an integer'}), Status.BAD_REQUEST.value
+		return jsonify({'message':'id not an integer'}), BAD_REQUEST
 
 	if is_invalid_or_missing_key(request):
-		return jsonify({'message':'missing or invalid key'}), Status.UNAUTHORIZED.value
+		return jsonify({'message':'missing or invalid key'}), UNAUTHORIZED
 
 	req_data = request.get_json()
 	address = ''
@@ -125,10 +127,10 @@ def put_id_properties(id):
 	row = db_sql.update_property(id, address, city, state, zip_code)
 
 	if not row:
-		return jsonify([{"message":"not found"}]), Status.NOT_FOUND.value
+		return jsonify([{"message":"not found"}]), NOT_FOUND
 
 	if row:
-		return jsonify([{"message":"updated"}]), Status.OK.value
+		return jsonify([{"message":"updated"}]), OK
 
 	
 # hello() function created for testing purposes
