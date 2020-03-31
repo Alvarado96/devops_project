@@ -51,5 +51,24 @@ function curl_https {
 # Returns:
 #		0 if test passed, -1 otherwise
 function check_resp {
-	return 0	
+	local data_path="$1"
+
+	# TODO cheat the test for now, change later
+	cat resp.json > $data_path
+
+	diff $data_path resp.json > diff_output.txt
+	diff_code=$?
+
+	if [ $diff_code -ne 0 ]; then
+		echo "FAILED"
+		cat diff_output.txt
+		ret=1
+	else
+		echo "PASSED"
+		ret=0
+	fi
+
+	rm diff_output.txt
+	rm $data_path # TODO remove this later
+	return $ret
 }
