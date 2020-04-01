@@ -72,3 +72,41 @@ function check_resp {
 	rm $data_path # TODO remove this later
 	return $ret
 }
+
+# Prints the method and URL that is being tested to stdout. This
+# function should be called before running a test.
+#
+# Parameters:
+#		1 -> HTTP method
+#		2 -> URL
+#
+# Returns:
+#		0 always
+function print_test_info_line {
+	local method="$1"
+	local url="$2"
+	printf "%s - %s - " "$1" "$2"
+	exit 0
+}
+
+# Prints the result of the previously run test. This should be called
+# following a call to print_test_info_line and other curl test functions.
+# If the test status is non-zero the diff command output is displayed also.
+#
+# Parameters:
+#		1 -> status of the test, this either 0 (passed) or non-zero (failed)
+#
+# Returns:
+#		0 always
+function print_test_result {
+	local status="$1"
+	
+	if [ $status -e 0 ]; then
+		printf "%s\n" "PASSED"
+	else
+		printf "%s\n", "FAILED"
+		cat diff_output.txt
+	fi
+
+	exit 0
+}
