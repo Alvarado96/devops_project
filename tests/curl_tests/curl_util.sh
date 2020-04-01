@@ -79,7 +79,7 @@ function check_resp {
 function print_test_info_line {
 	local method="$1"
 	local url="$2"
-	printf "%s - %s - " "$1" "$2"
+	printf "%s - %s - %s - " "TESTING" "$1" "$2"
 	return 0
 }
 
