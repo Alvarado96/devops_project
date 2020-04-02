@@ -9,8 +9,8 @@ info:
     name: MIT
     url: 'https://opensource.org/licenses/MIT'
 servers:
-  - url: http://cs47831.fulgentcorp.com:12185/
-  - url: https://cs47831.fulgentcorp.com:12186/
+  - url: http://cs47832.fulgentcorp.com:12186/
+  - url: https://cs47832.fulgentcorp.com:12185/
 tags:
   - name: Properties Request
     description: Example API for Properties requests
