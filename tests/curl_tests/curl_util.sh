@@ -63,6 +63,7 @@ function check_resp {
 
 	rm diff_output.txt
 	rm $data_path # TODO remove this later
+	rm resp.json
 
 	return $diff_code
 }
@@ -106,4 +107,20 @@ function _print_test_result {
 	fi
 
 	return 0
+}
+
+# Call this function if curl_http returns a non-zero error code. It will
+# print a test failed message and print the output of the failed curl
+# command. Before returning it will delete the resp.json file.
+#
+# Parameters:
+#		none
+#
+# Returns:
+#		always 0
+function handle_curl_error {
+	printf "%s\n" "CURL FALIED"
+	cat resp.json
+	rm resp.json
+	return 0	
 }
