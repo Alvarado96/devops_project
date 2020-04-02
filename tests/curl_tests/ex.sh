@@ -16,7 +16,7 @@ curl_http "$method" "$url" "" ""
 if [ $? -ne 0 ]; then
 	printf "$s\n" "curl_http FAILED"
 	rm resp.json
-	exit 0
+	exit 1 # 1 indicates failure
 fi
 
 # Ignoring the return value, would normally check this to determine
