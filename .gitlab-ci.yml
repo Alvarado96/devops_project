@@ -9,6 +9,7 @@ build-app:
   stage: build
   script:
     - echo "Hello build"
+    - sudo apt-get install sqlite3
     - python3 --version
 
 unit-test:
