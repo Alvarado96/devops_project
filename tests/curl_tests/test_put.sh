@@ -1,5 +1,6 @@
-echo "TESTING - PUT - http://$host_name:$port_number/properties/[ID]"
 source ./curl_util.sh
+
+print_test_info_line "PUT" "http://$host_name:$port_number/properties/[ID]"
 
 method="PUT"
 url="http://$host_name:$port_number/properties/2"
