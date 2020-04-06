@@ -8,8 +8,7 @@ stages:
 init-test:
   stage: init
   script:
-    - echo "import sqlite3" > py_sqlite_test.txt
-    - python3 < py_sqlite_test.txt
+    - python3 < import_test.txt
     - touch testDB.db
     - sqlite3 testDB.db < mkdb.txt
 
