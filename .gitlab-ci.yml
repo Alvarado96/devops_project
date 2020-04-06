@@ -20,7 +20,6 @@ curl-test:
   stage: curl_test
   script: 
     - echo "Hello curl-test"
-    - rm testDB.db
 
 deploy-app:
   stage: deploy
