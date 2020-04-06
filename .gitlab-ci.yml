@@ -9,8 +9,11 @@ build-app:
   stage: build
   script:
     - echo "Hello build"
-    - python3 --version
-    - sqlite3 --version
+    - touch testDB.db
+    - sqlite3 testDB.db < mkdb.txt
+    - echo "SELECT * FROM properties;" > sql.txt
+    - sqlite3 testDB.db < sql.txt
+    - rm testDB.db sql.txt
 
 unit-test:
   stage: unit_test
