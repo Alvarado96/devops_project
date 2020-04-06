@@ -1,12 +1,12 @@
 ---
 stages:
-  - build
+  - init
   - unit_test
   - curl_test
   - deploy
 
-build-app:
-  stage: build
+init-test:
+  stage: init
   script:
     - echo "Hello build"
     - touch testDB.db
