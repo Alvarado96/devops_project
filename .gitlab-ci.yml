@@ -8,12 +8,8 @@ stages:
 init-test:
   stage: init
   script:
-    - echo "Hello build"
     - touch testDB.db
     - sqlite3 testDB.db < mkdb.txt
-    - echo "SELECT * FROM properties;" > sql.txt
-    - sqlite3 testDB.db < sql.txt
-    - rm testDB.db sql.txt
 
 unit-test:
   stage: unit_test
@@ -22,7 +18,9 @@ unit-test:
 
 curl-test:
   stage: curl_test
-  script: echo "Hello curl-test"
+  script: 
+    - echo "Hello curl-test"
+    - rm testDB.db
 
 deploy-app:
   stage: deploy
