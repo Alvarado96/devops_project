@@ -19,6 +19,7 @@ unit-test:
   stage: unit_test
   script:
     - echo "Hello unit-test"
+    - python3 main.py
     - ps
 
 curl-test:
