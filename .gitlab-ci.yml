@@ -20,8 +20,8 @@ unit-test:
     - echo "Hello unit-test"
     - python3 main.py -p 12186 &
     - servic_epid=$!
-    - echo service_pid
-    - kill -9 service_pid
+    - echo $service_pid
+    - kill -9 $service_pid
 
 curl-test:
   stage: curl_test
