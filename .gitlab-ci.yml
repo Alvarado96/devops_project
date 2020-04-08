@@ -11,7 +11,7 @@ init-test:
     #- pip install --user Flask
     #- pip install --user flask-cors
     #- pip install --user flask-swagger-ui
-    - pip list
+    #- pip list
     - touch testDB.db
     - sqlite3 testDB.db < mkdb.txt
 
@@ -19,6 +19,7 @@ unit-test:
   stage: unit_test
   script:
     - echo "Hello unit-test"
+    - ps
 
 curl-test:
   stage: curl_test
