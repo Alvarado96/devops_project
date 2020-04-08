@@ -21,7 +21,7 @@ curl-test:
   script: 
     - python3 main.py -p 12188 &
     - servicePID=$!
-    - echo "Replace with command: ./test_driver.sh localhost 12188"
+    - echo "Replace with test_driver.sh localhost 12188"
     - kill -9 $servicePID
 
 deploy-app:
