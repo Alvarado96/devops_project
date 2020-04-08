@@ -62,7 +62,6 @@ function check_resp {
 	_print_test_result $diff_code
 
 	rm diff_output.txt
-	rm $data_path # TODO remove this later
 	rm resp.json
 
 	return $diff_code
