@@ -15,13 +15,14 @@ unit-test:
   stage: unit_test
   script:
     - echo "Hello unit-test"
-    - python3 main.py -p 12188 &
-    - kill -9 $!
 
 curl-test:
   stage: curl_test
   script: 
-    - echo "Hello curl-test"
+    - python3 main.py -p 12188 &
+    - servicePID=$!
+    - echo "Running curl tests $servicePID"
+    - kill -9 $servicePID
 
 deploy-app:
   stage: deploy
