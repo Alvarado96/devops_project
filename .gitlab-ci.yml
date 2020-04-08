@@ -8,9 +8,9 @@ stages:
 init-test:
   stage: init
   script:
-    - pip install Flask
-    - pip install flask-cors
-    - pip install flask-swagger-ui
+    - pip install --user Flask
+    - pip install --user flask-cors
+    - pip install --user flask-swagger-ui
     - pip list
     - touch testDB.db
     - sqlite3 testDB.db < mkdb.txt
