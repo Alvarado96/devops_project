@@ -18,7 +18,7 @@ unit-test:
   stage: unit_test
   script:
     - echo "Hello unit-test"
-    - python3 main.py -p 12186 &
+    - python3 main.py -p 12187 &
     - servic_epid=$!
     - echo $service_pid
     - kill -9 $service_pid
