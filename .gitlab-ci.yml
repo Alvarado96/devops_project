@@ -8,6 +8,7 @@ stages:
 init-test:
   stage: init
   script:
+    - pip list
     - touch testDB.db
     - sqlite3 testDB.db < mkdb.txt
 
