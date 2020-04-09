@@ -20,7 +20,8 @@ curl-test:
   stage: curl_test
   script: 
     - cd tests/curl_tests/
-    - echo "curl test still does not work"
+    - python3 ../../main.py
+    - bash test_driver.sh
 
 deploy-app:
   stage: deploy
