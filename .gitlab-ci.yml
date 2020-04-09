@@ -8,8 +8,7 @@ stages:
 init-test:
   stage: init
   script:
-    - touch testDB.db
-    - sqlite3 testDB.db < mkdb.txt
+    - echo "init stage"
 
 unit-test:
   stage: unit_test
@@ -19,6 +18,8 @@ unit-test:
 curl-test:
   stage: curl_test
   script: 
+    - touch properties.db
+    - sqlite3 properties.db < mkdb.txt
     - cd tests/curl_tests/
     - python3 ../../main.py -p 12190 &
     - bash test_driver.sh localhost 12190
