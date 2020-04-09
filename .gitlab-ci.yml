@@ -20,8 +20,8 @@ curl-test:
   stage: curl_test
   script: 
     - cd tests/curl_tests/
-    - python3 ../../main.py
-    - bash test_driver.sh
+    - python3 ../../main.py -p 12189
+    - bash test_driver.sh localhost 12189
 
 deploy-app:
   stage: deploy
