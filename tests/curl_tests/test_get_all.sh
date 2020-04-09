@@ -9,5 +9,5 @@ if [ $? -ne 0 ]; then
 	handle_curl_error
 	exit 1
 fi
-check_resp "get_all_data.json" # TODO
+check_resp "test_resps/all_data.json"
 exit $?

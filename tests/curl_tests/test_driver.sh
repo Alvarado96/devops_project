@@ -13,13 +13,10 @@ test_scripts=(
 	test_delete.sh
 )
 
-# PID of our flask web service
-servicePID=$!
-
-if [ "$#" -ne 2 ]; then
-	echo "Usage: $0 [host-name] [port-number]"
+if [ "$#" -ne 3 ]; then
+	echo "Usage: $0 [host-name] [port-number] [servicePID]"
 	echo ""
-	echo "Example: $0 fulgentcorp.com 8080"
+	echo "Example: $0 fulgentcorp.com 8080 17000"
 	exit 1
 fi
 
@@ -29,9 +26,6 @@ export host_name
 
 port_number="$2"
 export port_number
-
-# Start up the server
-#python3 ../../main.py -i $host_name -p $port_number &
 
 # Assume pass
 test_result=0
@@ -46,7 +40,7 @@ for test_script in "${test_scripts[@]}"; do
 done
 
 # Kill the server before exit
-kill -9 $servicePID
+kill -9 $3
 echo "Service killed..."
 
 exit $test_result
