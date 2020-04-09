@@ -15,10 +15,6 @@ unit-test:
   stage: unit_test
   script:
     - echo "Hello unit-test"
-    - echo 'exit 1' > a.sh
-    - bash a.sh
-    - echo 'done with test'
-    - rm a.sh
 
 curl-test:
   stage: curl_test
