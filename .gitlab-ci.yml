@@ -20,10 +20,9 @@ curl-test:
   script: 
     - cd tests/curl_tests/
     - touch properties.db
-    - cat ../../mkdb.txt
-    #- sqlite3 properties.db < ../../mkdb.txt
-    #- python3 ../../main.py -p 12185 &
-    #- bash test_driver.sh localhost 12185 $!
+    - sqlite3 properties.db < ../../mkdb.txt
+    - python3 ../../main.py -p 12185 &
+    - bash test_driver.sh localhost 12185 $!
 
 deploy-app:
   stage: deploy
