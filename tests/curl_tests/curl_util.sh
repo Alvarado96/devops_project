@@ -18,7 +18,8 @@ function curl_http {
 	curl -s --location --request "$method" '$url' \
 --header 'Content-Type: application/json' \
 --header '$header' \
---data-raw "$body"
+--data-raw "$body" > resp.json
+
 	
 	return $?
 }
