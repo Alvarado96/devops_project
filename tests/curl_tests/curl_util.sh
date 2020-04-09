@@ -12,45 +12,17 @@
 function curl_http {
 	local method="$1"
 	local url="$2"
-	local headers="$3"
+	local header="$3"  # Api-Key
 	local body="$4"
 
-	curl -s -S                 \
-	     --request "$method" \
-	     --header "$headers"  \
-	     --data "$body"      \
-	     "$url"              \
-			 > resp.json
+	curl -s --location --request "$method" '$url' \
+--header 'Content-Type: application/json' \
+--header '$header' \
+--data-raw "$body" > resp.json
 	
 	return $?
 }
 
-# Runs the curl command using HTTPS on the given parameters and outputs the
-# results to a file called resp.json.
-#
-# Parameters:
-#		1 -> HTTP method
-#		2 -> Resource path
-#		3 -> HTTP headers
-#		4 -> HTTP body
-#
-# Returns:
-#		0 if curl was successful, 1 otherwise
-function curl_https {
-	local method="$1"
-	local url="$2"
-	local headers="$3"
-	local body="$4"
-
-	curl -s                  \
-	     --request "$method" \
-	     --header "$headers"  \
-	     --data "$body"      \
-	     "$url"              \
-			 > resp.json
-	
-	return $?	
-}
 
 # Compares the curl output file (resp.json) with the data file to check 
 # if the service returned the correct response. Prints PASSED or FAILED
@@ -64,9 +36,6 @@ function curl_https {
 #		0 if test passed, -1 otherwise
 function check_resp {
 	local data_path="$1"
-
-	# TODO cheat the test for now, change later
-	cat resp.json > $data_path
 
 	diff $data_path resp.json > diff_output.txt
 	diff_code=$?
