@@ -15,7 +15,7 @@ function curl_http {
 	local headers="$3"
 	local body="$4"
 
-	curl                   \
+	curl -s -S                 \
 	     --request "$method" \
 	     --header "$headers"  \
 	     --data "$body"      \
