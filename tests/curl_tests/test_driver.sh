@@ -27,7 +27,23 @@ export host_name
 port_number="$2"
 export port_number
 
+# Start up the server
+python3 ../../main.py -i $host_name -p $port_number &
+servicePID=$!
+
+# Assume pass
+test_result=0
+
 # Run all tests, stopping if one returns a nonzero error code
 for test_script in "${test_scripts[@]}"; do
-	bash "$test_script" || { echo "STOPPING TEST..." ; exit 1; }
+	bash "$test_script" || { 
+		echo "STOPPING TEST..." ; 
+		test_result=1 ;
+		break;
+	}
 done
+
+# Kill the server before exit
+kill -9 $servicePID
+
+exit $test_result

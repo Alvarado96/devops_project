@@ -15,10 +15,10 @@ function curl_http {
 	local header="$3"  # Api-Key
 	local body="$4"
 
-	curl -s --location --request "$method" '$url' \
+	curl -s -S --location --request "$method" "$url" \
 --header 'Content-Type: application/json' \
 --header '$header' \
---data-raw "$body" > resp.json
+--data-raw "$body" &> resp.json
 	
 	return $?
 }
