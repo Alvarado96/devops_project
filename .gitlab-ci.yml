@@ -15,13 +15,17 @@ unit-test:
   stage: unit_test
   script:
     - echo "Hello unit-test"
+    - echo 'exit 1' > a.sh
+    - bash a.sh
+    - echo 'done with test'
+    - rm a.sh
 
 curl-test:
   stage: curl_test
   script: 
     - python3 main.py -p 12188 &
     - servicePID=$!
-    - echo "Replace with test_driver.sh localhost 12188"
+    #- bash tests/curl_tests/test_driver.sh localhost 12188
     - kill -9 $servicePID
 
 deploy-app:
