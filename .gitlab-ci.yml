@@ -22,7 +22,8 @@ curl-test:
     - touch properties.db
     - sqlite3 properties.db < ../../mkdb.txt
     - python3 ../../main.py -p 12185 &
-    - bash test_driver.sh localhost 12185 $!
+    - kill -9 $!
+    #- bash test_driver.sh localhost 12185 $!
 
 deploy-app:
   stage: deploy
