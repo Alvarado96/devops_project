@@ -3,9 +3,7 @@
 echo "Starting curl tests..."
 python3 ../../main.py localhost 12188 &
 servicePID=$!
-#bash test_driver.py
-echo "exit 0" > a.sh
-bash a.sh
+bash test_driver.py
 test_result=$?
 kill -9 $servicePID
 echo "Service shut down, ending stage..."
