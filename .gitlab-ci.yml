@@ -23,10 +23,7 @@ unit-test:
 curl-test:
   stage: curl_test
   script: 
-    - python3 main.py -p 12188 &
-    - servicePID=$!
-    #- bash tests/curl_tests/test_driver.sh localhost 12188
-    - kill -9 $servicePID
+    - bash tests/curl_tests/wrapper.sh
 
 deploy-app:
   stage: deploy
