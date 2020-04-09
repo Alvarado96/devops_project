@@ -17,7 +17,7 @@ function curl_http {
 
 	curl -s                  \
 	     --request "$method" \
-	     --header "$header"  \
+	     --header "$headers"  \
 	     --data "$body"      \
 	     "$url"              \
 			 > resp.json
@@ -37,7 +37,19 @@ function curl_http {
 # Returns:
 #		0 if curl was successful, 1 otherwise
 function curl_https {
-	return 0	
+	local method="$1"
+	local url="$2"
+	local headers="$3"
+	local body="$4"
+
+	curl -s                  \
+	     --request "$method" \
+	     --header "$headers"  \
+	     --data "$body"      \
+	     "$url"              \
+			 > resp.json
+	
+	return $?	
 }
 
 # Compares the curl output file (resp.json) with the data file to check 

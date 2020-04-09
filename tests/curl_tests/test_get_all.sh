@@ -10,5 +10,20 @@ if [ $? -ne 0 ]; then
 	exit 1
 fi
 
-check_resp "get_all_data.json"
+check_resp "get_all_data.json" # TODO
+if [ $? -ne 0 ]; then
+	exit 1
+fi
+
+url="https://$host_name:$port_number/properties"
+print_test_info_line "GET" "$url"
+
+curl_https "GET" "$url" "" ""
+if [ $? -ne 0 ]; then
+	handle_curl_error
+	exit 1
+fi
+
+
+check_resp "get_all_data.json" # TODO
 exit $?
