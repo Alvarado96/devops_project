@@ -8,7 +8,7 @@ stages:
 init-test:
   stage: init
   script:
-    - echo "init stage"
+    - echo "init stages"
 
 unit-test:
   stage: unit_test
