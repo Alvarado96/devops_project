@@ -20,7 +20,8 @@ if [ "$#" -ne 3 ]; then
 	exit 1
 fi
 
-# Sleep for 5 seconds before running the test
+# Sleep for 5 seconds before running the test, this prevents a connection
+# refused error from curl during the pipeline stage
 sleep 5
 
 # Make hostname and port number available to other test scripts
