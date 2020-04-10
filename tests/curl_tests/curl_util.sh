@@ -16,9 +16,9 @@ function curl_http {
 	local body="$4"
 
 	curl -s -S --location --request "$method" "$url" \
---header 'Content-Type: application/json' \
---header '$header' \
---data-raw "$body" &> resp.json
+       --header 'Content-Type: application/json' \
+       --header "$header" \
+       --data-raw "$body" &> resp.json
 	
 	return $?
 }
