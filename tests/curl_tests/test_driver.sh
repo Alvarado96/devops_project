@@ -20,6 +20,9 @@ if [ "$#" -ne 3 ]; then
 	exit 1
 fi
 
+# Sleep for 5 seconds before running the test
+sleep 5
+
 # Make hostname and port number available to other test scripts
 host_name="$1"
 export host_name
