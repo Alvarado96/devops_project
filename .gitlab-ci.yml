@@ -22,7 +22,7 @@ curl-test:
     - chmod u+x test_driver.sh
     - touch properties.db
     - sqlite3 properties.db < ../../mkdb.txt
-    - python3 ../../main.py -p 12185 &
+    - python3 ../../main.py -p 12185 &> junk.txt &
     - ./test_driver.sh localhost 12185 $!
 
 deploy-app:
