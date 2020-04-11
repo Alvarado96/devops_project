@@ -150,6 +150,7 @@ def is_integer(id):
 
 # Determines if the given request contains the correct API key
 def is_invalid_or_missing_key(req):
+	print(type(req.headers))
 	if 'Api-Key' not in req.headers:
 		return True
 
