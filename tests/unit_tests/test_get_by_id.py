@@ -5,6 +5,7 @@ from main import app
 
 class FlaskTestCase(unittest.TestCase):
 	def test_get_by_id(self):
+		print("Testing successful get by id GET /properties/1")
 		tester = app.test_client(self)
 		response = tester.get('/properties/1')
 		self.assertEqual(response.status_code, 200)
