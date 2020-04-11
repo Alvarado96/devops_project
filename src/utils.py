@@ -14,3 +14,17 @@ def has_invalid_or_missing_key(headers):
 	if 'Api-Key' not in headers:
 		return True
 	return headers['Api-Key'] != 'cs4783FTW'
+
+
+# Determines if the request has any missing fields
+def has_missing_property_data(req_data):
+	error_msg = ""
+	if 'address' not in req_data:
+		error_msg += 'missing address '
+	if 'city' not in req_data:
+		error_msg += 'missing city '
+	if 'state' not in req_data:
+		error_msg += 'missing state '
+	if 'zip' not in req_data:
+		error_msg += 'missing zip '
+	return error_msg.strip()
