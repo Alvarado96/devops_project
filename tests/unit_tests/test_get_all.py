@@ -1,6 +1,6 @@
 import sys
 import unittest
-sys.path.append('../../')
+sys.path.append('../../src/')
 from main import app
 
 class FlaskTestCase(unittest.TestCase):

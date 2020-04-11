@@ -1,7 +1,7 @@
 import sys
 import json
 import unittest
-sys.path.append('../../')
+sys.path.append('../../src/')
 from main import app
 
 class TestAnalytics(unittest.TestCase):
