@@ -73,14 +73,11 @@ def insert_property():
 	if utils.has_invalid_or_missing_key(request.headers):
 		return jsonify({'message':'missing or invalid key'}), UNAUTHORIZED
 
+	err_msg = utils.has_missing_property_data(request.get_json())
+	if err_msg:
+		return jsonify({'message':err_msg}), BAD_REQUEST
+
 	errors = []
-	req_data = request.get_json()
-
-	address = req_data['address']
-	city = req_data['city']
-	state = req_data['state']
-	zip_code = req_data['zip']
-
 	if len(address) < 1 or len(address) > 200:
 		errors.append({"message":"address is not between 1 and 200 characters"})
 
