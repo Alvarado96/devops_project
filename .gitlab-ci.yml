@@ -13,7 +13,9 @@ init-test:
 unit-test:
   stage: unit_test
   script:
-    - echo "Hello unit-test"
+    - cd tests/unit_tests/
+    - chmod u+x test_suite.sh
+    - ./test_suite.sh
 
 curl-test:
   stage: curl_test
