@@ -27,3 +27,4 @@ deploy-app:
     - echo "Deploying service"
     - echo "$MY_KEY" > key.txt
     - chmod 600 key.txt
+    - scp -i key.txt -r ./src/*.py ddd233@cs47832.fulgentcorp.com:/home/ddd233/service
