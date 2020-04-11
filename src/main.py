@@ -143,6 +143,11 @@ def hello():
 	return jsonify([{"message":"hello yourself"}])
 
 
+@app.route('/goodbye')
+def goodbye():
+	return jsonify([{'message':'goodbye yourself'}])
+
+
 if __name__ == '__main__':
 	parser = argparse.ArgumentParser(description='Web service')
 	parser.add_argument('-i', type=str, default='127.0.0.1', dest='host', 
