@@ -28,3 +28,10 @@ def has_missing_property_data(req_data):
 	if 'zip' not in req_data:
 		error_msg += 'missing zip '
 	return error_msg.strip()
+
+# Determines if the address length is correct length
+def has_invalid_address_length(address):
+	if len(address) > 200:
+		return True
+	return False
+

@@ -43,6 +43,13 @@ class TestUtilFunctions(unittest.TestCase):
 			err_msg = utils.has_missing_property_data(data)
 			self.assertEqual(err_msg, err_msgs[i])
 
+	def test_has_invalid_address_length(self):
+		valid_address = "a"
+		self.assertFalse(utils.has_invalid_address_length(valid_address))
+
+		invalid_address = 'a' * 300
+		self.assertTrue(utils.has_invalid_address_length(invalid_address))
+
 
 if __name__ == '__main__':
 	unittest.main()

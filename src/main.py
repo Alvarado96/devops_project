@@ -83,7 +83,8 @@ def insert_property():
 	city = data['city']
 	state = data['state']
 	zip_code = data['zip']
-	if len(address) < 1 or len(address) > 200:
+	
+	if utils.has_invalid_address_length(address):
 		errors.append({"message":"address is not between 1 and 200 characters"})
 
 	if len(city) < 1 or len(city) > 50:
