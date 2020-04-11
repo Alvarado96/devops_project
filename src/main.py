@@ -2,6 +2,7 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 from flask_swagger_ui import get_swaggerui_blueprint
 import database as db_sql
+import utils
 from status_codes import OK, CREATED, BAD_REQUEST,  \
                          UNAUTHORIZED, NOT_FOUND,   \
 												 SERVER_ERROR
@@ -40,10 +41,10 @@ def get_all_properties():
 # delete_property(id) removes a row in the database specified by the id
 @app.route('/properties/<string:id>', methods=['DELETE'])
 def delete_property(id):
-	if not is_integer(id):
+	if not utils.is_integer(id):
 		return jsonify({'message':'id not an integer'}), BAD_REQUEST
 
-	if is_invalid_or_missing_key(request):
+	if utils.has_invalid_or_missing_key(request.headers):
 		return jsonify({'message':'missing or invalid key'}), UNAUTHORIZED
 	
 	rows_affected = db_sql.delete_property(id)
@@ -57,7 +58,7 @@ def delete_property(id):
 # get_id_properties(id) returns a row in json form specified by the id
 @app.route('/properties/<string:id>', methods=['GET'])
 def get_id_properties(id):
-	if not is_integer(id):
+	if not utils.is_integer(id):
 		return jsonify({'message':'id not an integer'}), BAD_REQUEST
 
 	row = db_sql.select_property(id)
@@ -69,17 +70,14 @@ def get_id_properties(id):
 # insert_property() inserts a new entry into the database
 @app.route('/properties', methods=['POST'])
 def insert_property():
-	if is_invalid_or_missing_key(request):
+	if utils.has_invalid_or_missing_key(request.headers):
 		return jsonify({'message':'missing or invalid key'}), UNAUTHORIZED
 
+	err_msg = utils.has_missing_property_data(request.get_json())
+	if err_msg:
+		return jsonify({'message':err_msg}), BAD_REQUEST
+
 	errors = []
-	req_data = request.get_json()
-
-	address = req_data['address']
-	city = req_data['city']
-	state = req_data['state']
-	zip_code = req_data['zip']
-
 	if len(address) < 1 or len(address) > 200:
 		errors.append({"message":"address is not between 1 and 200 characters"})
 
@@ -103,10 +101,10 @@ def insert_property():
 # put_id(id) updates an entry in the database
 @app.route('/properties/<string:id>', methods=['PUT'])
 def put_id_properties(id):
-	if not is_integer(id):
+	if not utils.is_integer(id):
 		return jsonify({'message':'id not an integer'}), BAD_REQUEST
 
-	if is_invalid_or_missing_key(request):
+	if utils.has_invalid_or_missing_key(request.headers):
 		return jsonify({'message':'missing or invalid key'}), UNAUTHORIZED
 
 	req_data = request.get_json()
@@ -137,23 +135,6 @@ def put_id_properties(id):
 @app.route('/hello')
 def hello():
 	return jsonify([{"message":"hello yourself"}])
-
-
-# Determines if the given ID is an integer or not
-def is_integer(id):
-	try:
-		int(id)
-		return True
-	except ValueError:
-		return False
-
-
-# Determines if the given request contains the correct API key
-def is_invalid_or_missing_key(req):
-	if 'Api-Key' not in req.headers:
-		return True
-
-	return req.headers['Api-Key'] != 'cs4783FTW'
 
 
 if __name__ == '__main__':
