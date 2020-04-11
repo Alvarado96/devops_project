@@ -1,14 +1,8 @@
 ---
 stages:
-  - init
   - unit_test
   - curl_test
   - deploy
-
-init-test:
-  stage: init
-  script:
-    - echo "init stages"
 
 unit-test:
   stage: unit_test
