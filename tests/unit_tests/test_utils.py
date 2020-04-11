@@ -3,7 +3,7 @@ import sys
 sys.path.append('../../src/')
 import utils
 
-class TestUtilFunction(unittest.TestCase):
+class TestUtilFunctions(unittest.TestCase):
 	def test_is_integer(self):
 		for i in range(5):
 			self.assertTrue(utils.is_integer(str(i)))
