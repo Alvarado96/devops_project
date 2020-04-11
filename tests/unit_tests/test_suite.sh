@@ -1,2 +1,2 @@
 python -m unittest discover -s . -p 'test*.py'
-rm *.pyc
+exit $?
