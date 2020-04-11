@@ -90,7 +90,7 @@ def insert_property():
 	if utils.has_invalid_city_length(city):
 		errors.append({"message":"city is not between 1 and 50 characters"})
 
-	if not len(state) == 2:
+	if utils.has_invalid_state_length(state):
 		errors.append({"message":"state is not exactly two characters"})
 
 	if len(zip_code) < 5 or len(zip_code) > 10:

@@ -35,8 +35,15 @@ def has_invalid_address_length(address):
 		return True
 	return False
 
+# Determines if city length is correct length
 def has_invalid_city_length(city):
 	if len(city) < 1 or len(city) > 50:
+		return True
+	return False
+
+# Determines if state length is correct length
+def has_invalid_state_length(state):
+	if len(state) != 2:
 		return True
 	return False
 
