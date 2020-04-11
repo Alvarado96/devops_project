@@ -31,7 +31,12 @@ def has_missing_property_data(req_data):
 
 # Determines if the address length is correct length
 def has_invalid_address_length(address):
-	if len(address) > 200:
+	if len(address) > 200 or len(address) < 1:
+		return True
+	return False
+
+def has_invalid_city_length(city):
+	if len(city) < 1 or len(city) > 50:
 		return True
 	return False
 

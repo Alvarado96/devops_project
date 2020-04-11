@@ -47,8 +47,21 @@ class TestUtilFunctions(unittest.TestCase):
 		valid_address = "a"
 		self.assertFalse(utils.has_invalid_address_length(valid_address))
 
+		no_address = ''
+		self.assertTrue(utils.has_invalid_address_length(no_address))
+
 		invalid_address = 'a' * 300
 		self.assertTrue(utils.has_invalid_address_length(invalid_address))
+
+	def test_has_invalid_city_length(self):
+		valid_city = "San Antonio"
+		self.assertFalse(utils.has_invalid_city_length(valid_city))
+
+		no_city = ''
+		self.assertTrue(utils.has_invalid_city_length(no_city))
+		
+		invalid_city = 'a' * 52
+		self.assertTrue(utils.has_invalid_city_length(invalid_city))
 
 
 if __name__ == '__main__':
