@@ -43,19 +43,19 @@ def update_property(property_id, address, city, state, zip_code):
 
 	if address:
 		statement = 'UPDATE properties set address=(?) where id=(?)'
-		row_cnt = cur.execute(statement, (address, property_id))
+		row_cnt = cur.execute(statement, (address, property_id)).rowcount
 
 	if city:
 		statement = 'UPDATE properties set city=(?) where id=(?)'
-		row_cnt = cur.execute(statement, (city, property_id))
+		row_cnt = cur.execute(statement, (city, property_id)).rowcount
 
 	if state:
 		statement = 'UPDATE properties set state=(?) where id=(?)'
-		row_cnt = cur.execute(statement, (state, property_id))
+		row_cnt = cur.execute(statement, (state, property_id)).rowcount
 
 	if zip_code:
 		statement = 'UPDATE properties set zip=(?) where id=(?)'
-		row_cnt = cur.execute(statement, (zip_code, property_id))
+		row_cnt = cur.execute(statement, (zip_code, property_id)).rowcount
 
 	con.commit()
 	return row_cnt
