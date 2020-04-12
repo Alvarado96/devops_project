@@ -52,4 +52,3 @@ def has_invalid_zip_length(zip_code):
 	if len(zip_code) < 5 or len(zip_code) > 10:
 		return True
 	return False
-
