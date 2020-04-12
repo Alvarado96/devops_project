@@ -140,7 +140,7 @@ def put_id_properties(id):
 
 	if 'zip' in req_data:
 		zip_code = req_data['zip']
-		if utils.has_invalid_zip_length(zip_code)
+		if utils.has_invalid_zip_length(zip_code):
 			err_msg += 'zip code is not between 5 and 10 characters '
 
 	if err_msg:
