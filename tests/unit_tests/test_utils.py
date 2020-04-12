@@ -43,6 +43,7 @@ class TestUtilFunctions(unittest.TestCase):
 			err_msg = utils.has_missing_property_data(data)
 			self.assertEqual(err_msg, err_msgs[i])
 
+
 	def test_has_invalid_address_length(self):
 		valid_address = "a"
 		self.assertFalse(utils.has_invalid_address_length(valid_address))
@@ -52,6 +53,7 @@ class TestUtilFunctions(unittest.TestCase):
 
 		invalid_address = 'a' * 300
 		self.assertTrue(utils.has_invalid_address_length(invalid_address))
+
 
 	def test_has_invalid_city_length(self):
 		valid_city = "San Antonio"
@@ -63,6 +65,7 @@ class TestUtilFunctions(unittest.TestCase):
 		invalid_city = 'a' * 52
 		self.assertTrue(utils.has_invalid_city_length(invalid_city))
 
+
 	def test_has_invalid_state_length(self):
 		valid_state = "TX"
 		self.assertFalse(utils.has_invalid_state_length(valid_state))
@@ -72,6 +75,7 @@ class TestUtilFunctions(unittest.TestCase):
 
 		invalid_state_greater_than_2 = "Texas"
 		self.assertTrue(utils.has_invalid_state_length(invalid_state_greater_than_2))
+
 
 	def test_has_invalid_zip_length(self):
 		valid_zip = "78214"
