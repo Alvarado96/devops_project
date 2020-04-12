@@ -78,30 +78,32 @@ def insert_property():
 	if err_msg:
 		return jsonify({'message':err_msg}), BAD_REQUEST
 
-	errors = []
+	err_msg = ''
 	address = data['address']
 	city = data['city']
 	state = data['state']
 	zip_code = data['zip']
 
 	if utils.has_invalid_address_length(address):
-		errors.append({"message":"address is not between 1 and 200 characters"})
+		err_msg += 'address is not between 1 and 200 characters '
 
 	if utils.has_invalid_city_length(city):
-		errors.append({"message":"city is not between 1 and 50 characters"})
+		err_msg += 'city is not between 1 and 50 characters '
 
 	if utils.has_invalid_state_length(state):
-		errors.append({"message":"state is not exactly two characters"})
+		err_msg += 'state is not exactly two characters '
 
 	if utils.has_invalid_zip_length(zip_code):
-		errors.append({"message":"zip is not between 5 and 10 characters"})
+		err_msg += 'zip is not between 5 and 10 characters'
 
 	if errors:
-		return jsonify(errors), BAD_REQUEST
+		return jsonify({'message':err_msg.strip()), BAD_REQUEST
 
 	rows_affected = db_sql.insert_property((address, state, city, zip_code))
+	if rows_affected == -1:
+		return jsonify({'message':'there was an error, try later'}), SERVER_ERROR
 	
-	return jsonify([{"message":"added"}]), CREATED
+	return jsonify([{'message':'added'}]), CREATED
 
 
 # put_id(id) updates an entry in the database
