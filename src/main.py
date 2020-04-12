@@ -97,7 +97,7 @@ def insert_property():
 		err_msg += 'zip is not between 5 and 10 characters'
 
 	if errors:
-		return jsonify({'message':err_msg.strip()), BAD_REQUEST
+		return jsonify({'message':err_msg.strip()}), BAD_REQUEST
 
 	rows_affected = db_sql.insert_property((address, state, city, zip_code))
 	if rows_affected == -1:
