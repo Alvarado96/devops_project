@@ -73,6 +73,16 @@ class TestUtilFunctions(unittest.TestCase):
 		invalid_state_greater_than_2 = "Texas"
 		self.assertTrue(utils.has_invalid_state_length(invalid_state_greater_than_2))
 
+	def test_has_invalid_zip_length(self):
+		valid_zip = "78214"
+		self.assertFalse(utils.has_invalid_zip_length(valid_zip))
+
+		invalid_zip = "2821"
+		self.assertTrue(utils.has_invalid_state_length(invalid_zip))
+
+		invalid_zip = "1" * 11
+		self.assertTrue(utils.has_invalid_state_length(invalid_zip))
+
 
 if __name__ == '__main__':
 	unittest.main()

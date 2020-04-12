@@ -47,3 +47,9 @@ def has_invalid_state_length(state):
 		return True
 	return False
 
+# Determines if zip length is correct length
+def has_invalid_zip_length(zip_code):
+	if len(zip_code) < 5 or len(zip_code) > 10:
+		return True
+	return False
+

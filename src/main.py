@@ -93,7 +93,7 @@ def insert_property():
 	if utils.has_invalid_state_length(state):
 		errors.append({"message":"state is not exactly two characters"})
 
-	if len(zip_code) < 5 or len(zip_code) > 10:
+	if utils.has_invalid_zip_length(zip_code):
 		errors.append({"message":"zip is not between 5 and 10 characters"})
 
 	if errors:
