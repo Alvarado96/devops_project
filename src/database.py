@@ -1,7 +1,18 @@
 import sqlite3
 import sys
+import os.path
 
-DATABASE = './properties.db'
+# Check for the database file in the current directory. If it is not
+# there check in the paraent directory. If it is not in either of the
+# directories, print error message and stop service.
+DATABASE = ''
+if os.path.isfile('./properties.db'):
+	DATABASE = './properties.db'	
+elif os.path.isfile('../properties.db'):
+	DATABASE = '../properties.db'	
+else:
+	print('properties.db does not exist, stopping...')
+	sys.exit(1)
 
 # method used to handle inserting a new query entry
 def insert_property(new_property):
