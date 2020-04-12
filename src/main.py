@@ -114,27 +114,44 @@ def put_id_properties(id):
 		return jsonify({'message':'missing or invalid key'}), UNAUTHORIZED
 
 	req_data = request.get_json()
+	if not req_data:
+		return jsonify({'message':'missing body'}), BAD_REQUEST
+
 	address = ''
 	city = ''
 	state = ''
 	zip_code = ''
+	err_msg = ''
 
-	if req_data and 'address' in req_data:
+	if 'address' in req_data:
 		address = req_data['address']
-	if req_data and 'city' in req_data:
+		if utils.has_invalid_address_length(address):
+			err_msg += 'address is not between 1 and 200 characters '
+
+	if 'city' in req_data:
 		city = req_data['city']
-	if req_data and 'state' in req_data:
+		if utils.has_invalid_city_length(city):
+			err_msg += 'city is not between 1 and 50 characters '
+
+	if 'state' in req_data:
 		state = req_data['state']
-	if req_data and 'zip' in req_data:
+		if utils.has_invalid_state_length(state):
+			err_msg += 'state is not exactly two characters '
+
+	if 'zip' in req_data:
 		zip_code = req_data['zip']
+		if utils.has_invalid_zip_length(zip_code)
+			err_msg += 'zip code is not between 5 and 10 characters '
+
+	if err_msg:
+		return jsonify({'message':err_msg.strip()}), BAD_REQUEST
 
 	row = db_sql.update_property(id, address, city, state, zip_code)
 
 	if not row:
 		return jsonify([{"message":"not found"}]), NOT_FOUND
 
-	if row:
-		return jsonify([{"message":"updated"}]), OK
+	return jsonify([{"message":"updated"}]), OK
 
 	
 # hello() function created for testing purposes
