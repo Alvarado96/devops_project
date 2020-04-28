@@ -7,10 +7,10 @@
 # Names and order of all test scripts to run
 test_scripts=(
 	test_get_all.sh
-	test_get_by_id.sh
-	test_post.sh
-	test_put.sh
-	test_delete.sh
+	#test_get_by_id.sh
+	#test_post.sh
+	#test_put.sh
+	#test_delete.sh
 )
 
 if [ "$#" -ne 3 ]; then
