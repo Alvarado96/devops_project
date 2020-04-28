@@ -22,10 +22,10 @@ if not os.environ.get('MYSQL_DB'):
     print('No MySQL database name')
     sys.exit(1)
 
-app.config['MYSQL_USER'] = 'fgd806'
-app.config['MYSQL_PASSWORD'] = 'Evlv3h7MzBF30ay967IS'
-app.config['MYSQL_HOST'] = 'easel2.fulgentcorp.com'
-app.config['MYSQL_DB'] = 'fgd806'
+app.config['MYSQL_USER'] = os.environ.get('MYSQL_USER')
+app.config['MYSQL_PASSWORD'] = os.environ.get('MYSQL_PASSWORD')
+app.config['MYSQL_HOST'] = os.environ.get('MYSQL_HOST')
+app.config['MYSQL_DB'] = os.environ.get('MYSQL_DB')
 app.config['MYSQL_CURSORCLASSS'] = 'DictCursor'
 
 mysql = MySQL(app)
