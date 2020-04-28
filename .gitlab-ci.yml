@@ -24,8 +24,8 @@ curl-test:
 deploy-app:
   stage: deploy
   script:
-    - echo "Deploying service"
-    - echo "$MY_KEY" > key.txt
-    - chmod 600 key.txt
-    - scp -i key.txt -r ./src/*.py ddd233@cs47832.fulgentcorp.com:/home/ddd233/service
-    - scp -i key.txt -r ./static/*.yaml ddd233@cs47832.fulgentcorp.com:/home/ddd233/service/static
+    #- echo "Deploying service"
+    #- echo "$MY_KEY" > key.txt
+    #- chmod 600 key.txt
+    #- scp -i key.txt -r ./src/*.py ddd233@cs47832.fulgentcorp.com:/home/ddd233/service
+    #- scp -i key.txt -r ./static/*.yaml ddd233@cs47832.fulgentcorp.com:/home/ddd233/service/static
