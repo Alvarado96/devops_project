@@ -47,4 +47,5 @@ done
 kill -9 $3
 echo "Service killed..."
 
+cat junk.txt
 exit $test_result
