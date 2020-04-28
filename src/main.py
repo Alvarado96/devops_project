@@ -169,7 +169,6 @@ def goodbye():
 
 
 if __name__ == '__main__':
-  print(os.environ.get('HELLO_WORLD'))
 	parser = argparse.ArgumentParser(description='Web service')
 	parser.add_argument('-i', type=str, default='127.0.0.1', dest='host', 
 						help='IP of service (default: localhost')
