@@ -33,7 +33,6 @@ app.register_blueprint(swaggerui_blueprint, url_prefix=SWAGGER_URL)
 # get_all_properties() returns all rows in the database in json form
 @app.route('/properties', methods=['GET'])
 def get_all_properties():
-    print('getting all rows')
 	rows = db_sql.select_all_properties()
 	if not rows:
 		return jsonify({'message':'not found'}), NOT_FOUND
