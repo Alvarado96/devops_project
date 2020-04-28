@@ -38,7 +38,7 @@ def select_all_properties():
         cur = mysql.connection.cursor()
         cur.execute(statement)
         rows = cur.fetchall()
-        print(rows)
+        print('ROWS:', rows)
         return _to_dict(cur, rows)
     except Exception as e:
         print('ERROR: select_all_property: DB error:', e)
