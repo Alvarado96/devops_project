@@ -7,6 +7,7 @@ stages:
 unit-test:
   stage: unit_test
   script:
+    - python3 env_test.py
     - cd tests/unit_tests/
     - chmod u+x test_suite.sh
     - ./test_suite.sh
