@@ -3,7 +3,7 @@ stages:
   - install
   - unit_test
   - curl_test
-  #- deploy
+  - deploy
 
 install:
   stage: install
