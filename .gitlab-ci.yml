@@ -1,8 +1,14 @@
 ---
 stages:
-  - unit_test
-  - curl_test
-  - deploy
+  - install
+  #- unit_test
+  #- curl_test
+  #- deploy
+
+install:
+  stage: install
+  script:
+    - pip install flask-mysqldb
 
 unit-test:
   stage: unit_test
