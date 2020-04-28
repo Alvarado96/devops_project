@@ -24,6 +24,7 @@ curl-test:
 deploy-app:
   stage: deploy
   script:
+    - echo "NO MORE DEPLOY!!"
     #- echo "Deploying service"
     #- echo "$MY_KEY" > key.txt
     #- chmod 600 key.txt
