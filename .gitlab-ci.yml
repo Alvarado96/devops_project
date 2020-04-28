@@ -8,7 +8,7 @@ stages:
 install:
   stage: install
   script:
-    - pip install flask-mysqldb
+    - pip install --user flask-mysqldb
 
 unit-test:
   stage: unit_test
