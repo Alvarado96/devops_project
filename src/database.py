@@ -18,7 +18,7 @@ if not os.environ.get('MYSQL_HOST'):
     print('No MySQL hostname')
     sys.exit(1)
 
-if not os.environ.get('MYSQL_DB')
+if not os.environ.get('MYSQL_DB'):
     print('No MySQL database name')
     sys.exit(1)
 
