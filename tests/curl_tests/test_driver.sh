@@ -47,7 +47,13 @@ done
 kill -9 $3
 echo "Service killed..."
 
+sleep 1
+
 cat stdout.txt
 echo "================================="
+
+sleep 1
+
 cat stderr.txt
+
 exit $test_result
