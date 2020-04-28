@@ -1,9 +1,9 @@
 ---
 stages:
   - install
-  #- unit_test
-  #- curl_test
-  #- deploy
+  - unit_test
+  - curl_test
+  - deploy
 
 install:
   stage: install
