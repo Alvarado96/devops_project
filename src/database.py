@@ -34,6 +34,7 @@ mysql = MySQL(app)
 def select_all_properties():
     cur = None
     statement = '''SELECT id FROM properties'''
+    print('before try')
     try:
         cur = mysql.connection.cursor()
         cur.execute(statement)
