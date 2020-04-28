@@ -33,7 +33,7 @@ mysql = MySQL(app)
 # method handles the query for getting all entries in the database
 def select_all_properties():
     cur = None
-    statement = '''SELECT id FROM properties'''
+    statement = 'SELECT (address,id,zip) FROM properties'
     print('before try')
     try:
         cur = mysql.connection.cursor()
