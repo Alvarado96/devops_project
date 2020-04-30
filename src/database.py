@@ -1,5 +1,4 @@
 from flask import Flask
-from flask_mysqldb import MySQL
 from flask import Blueprint
 from main import app
 import mysql.connector
@@ -97,15 +96,6 @@ def _to_dict(cursor, rows):
     for row in rows:
         ls.append(_make_dicts(cursor, row))     
     return ls
-    
-
-# converts database entry to dictionary
-def _to_dict(cursor, rows):
-    ls = []
-    for row in rows:
-        ls.append(_make_dicts(cursor, row))     
-    return ls
-    
 
 # returns a list of dictionarys
 def _make_dicts(cursor, row):
