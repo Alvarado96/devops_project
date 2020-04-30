@@ -25,17 +25,9 @@ if not os.environ.get('MYSQL_DB'):
     sys.exit(1)
 
 
-# Build connection to MySQL database with credentials
-mydb = mysql.connector.connect(
-  host=os.environ.get('MYSQL_HOST'),
-  user=os.environ.get('MYSQL_USER'),
-  passwd=os.environ.get('MYSQL_PASSWORD'),
-  database=os.environ.get('MYSQL_DB')
-)
-
-
 # Gets all properties from the database
 def select_all_properties():
+    mydb = _establish_connection()
     mycursor = mydb.cursor()
     mycursor.execute("SELECT * FROM properties")
     myresult = mycursor.fetchall()
@@ -44,6 +36,7 @@ def select_all_properties():
 
 # Method used to handle inserting a new query entry
 def insert_property(new_property):
+    mydb = _establish_connection()
     mycursor = mydb.cursor()
     statement = """INSERT INTO properties(address, state, city, zip) VALUES(%s,%s,%s,%s)"""
     row_cnt = mycursor.execute(statement, new_property)
@@ -53,6 +46,7 @@ def insert_property(new_property):
 
 # Method updates an entry in the database
 def update_property(property_id, address, city, state, zip_code):
+    mydb = _establish_connection()
     mycursor = mydb.cursor()
     row_cnt = 1
     
@@ -82,6 +76,7 @@ def update_property(property_id, address, city, state, zip_code):
 
 # Method returns an entry specified by the id in dictionary form
 def select_property(property_id):
+    mydb = _establish_connection()
     mycursor = mydb.cursor()
     mycursor.execute("SELECT * FROM properties where id = %s", (property_id,))
     myresult = mycursor.fetchall()
@@ -90,11 +85,23 @@ def select_property(property_id):
 
 # Method handles the query for deleting an entry specified by the id
 def delete_property(property_id):
+    mydb = _establish_connection()
     mycursor = mydb.cursor()
     statement = """DELETE FROM properties WHERE id=%s"""
     row_cnt = mycursor.execute(statement, (property_id,))
     mydb.commit()
     return row_cnt
+
+
+# Build connection to MySQL database with credentials
+def _establish_connection():
+    mydb = mysql.connector.connect(
+      host=os.environ.get('MYSQL_HOST'),
+      user=os.environ.get('MYSQL_USER'),
+      passwd=os.environ.get('MYSQL_PASSWORD'),
+      database=os.environ.get('MYSQL_DB')
+    )
+    return mydb
 
 
 # Converts database entry to dictionary
