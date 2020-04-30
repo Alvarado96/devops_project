@@ -70,32 +70,46 @@ def insert_property(new_property):
 
 # Method updates an entry in the database
 def update_property(property_id, address, city, state, zip_code):
-    mydb = _establish_connection()
-    mycursor = mydb.cursor()
-    row_cnt = 1
-    
-    if address:
-        statement = """UPDATE properties set address=%s where id=%s"""
-        mycursor.execute(statement, (address, property_id,))
-        row_cnt = mycursor.rowcount
+    mydb, mycursor = None, None
+    row_cnt = 0
+    try:
+        mydb = _establish_connection()
+        mycursor = mydb.cursor()
+        
+        if address:
+            statement = """UPDATE properties set address=%s where id=%s"""
+            mycursor.execute(statement, (address, property_id,))
+            row_cnt = mycursor.rowcount
 
-    if city:
-        statement = """UPDATE properties set city=%s where id=%s"""
-        mycursor.execute(statement, (city, property_id,))
-        row_cnt = mycursor.rowcount
+        if city:
+            statement = """UPDATE properties set city=%s where id=%s"""
+            mycursor.execute(statement, (city, property_id,))
+            row_cnt = mycursor.rowcount
 
-    if state:
-        statement = """UPDATE properties set state=%s where id=%s"""
-        mycursor.execute(statement, (state, property_id,))
-        row_cnt = mycursor.rowcount
+        if state:
+            statement = """UPDATE properties set state=%s where id=%s"""
+            mycursor.execute(statement, (state, property_id,))
+            row_cnt = mycursor.rowcount
 
-    if zip_code:
-        statement = """UPDATE properties set zip=%s where id=%s"""
-        mycursor.execute(statement, (zip_code, property_id,))
-        row_cnt = mycursor.rowcount
+        if zip_code:
+            statement = """UPDATE properties set zip=%s where id=%s"""
+            mycursor.execute(statement, (zip_code, property_id,))
+            row_cnt = mycursor.rowcount
 
-    mydb.commit()
-    return str(row_cnt)
+        mydb.commit()
+        return row_cnt
+    except mysql.connector.Error as err:
+        print('DB ERROR: update_property: {}'.format(err))
+        row_cnt = 0
+    except Exception as err:
+        print('DB ERROR: update_property: {}'.format(err))
+        row_cnt = 0
+    finally:
+        if mydb:
+            mydb.close()
+        if mycursor:
+            mycursor.close()
+    return row_cnt
 
 
 # Method returns an entry specified by the id in dictionary form
