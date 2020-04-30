@@ -121,12 +121,24 @@ def select_property(property_id):
 
 # Method handles the query for deleting an entry specified by the id
 def delete_property(property_id):
-    mydb = _establish_connection()
-    mycursor = mydb.cursor()
-    statement = """DELETE FROM properties WHERE id=%s"""
-    row_cnt = mycursor.execute(statement, (property_id,))
-    mydb.commit()
-    return row_cnt
+    mydb, mycursor = None, None
+    try:
+        mydb = _establish_connection()
+        mycursor = mydb.cursor()
+        statement = """DELETE FROM properties WHERE id=%s"""
+        row_cnt = mycursor.execute(statement, (property_id,))
+        mydb.commit()
+        return row_cnt
+    except mysql.connector.Error as err:
+        print('DB ERROR: delete_property: {}'.format(err))
+    except Exception as err:
+        print('DB ERROR: delete_property: {}'.format(err))
+    finally:
+        if mydb:
+            mydb.close()
+        if mycursor:
+            mycursor.close()
+    return -1
 
 
 # Build connection to MySQL database with credentials
