@@ -100,11 +100,23 @@ def update_property(property_id, address, city, state, zip_code):
 
 # Method returns an entry specified by the id in dictionary form
 def select_property(property_id):
-    mydb = _establish_connection()
-    mycursor = mydb.cursor()
-    mycursor.execute("SELECT * FROM properties where id = %s", (property_id,))
-    myresult = mycursor.fetchall()
-    return _to_dict(mycursor, myresult)
+    mydb, mycursor = None, None
+    try:
+        mydb = _establish_connection()
+        mycursor = mydb.cursor()
+        mycursor.execute("SELECT * FROM properties where id = %s", (property_id,))
+        myresult = mycursor.fetchall()
+        return _to_dict(mycursor, myresult)
+    except mysql.connector.Error as err:
+        print('DB ERROR: select_property: {}'.format(err))
+    except Exception as err:
+        print('SERVER ERROR: select_property: {}'.format(err))
+    finally:
+        if mydb:
+            mydb.close()
+        if mycursor:
+            mydb.cursor()
+    return None
 
 
 # Method handles the query for deleting an entry specified by the id
