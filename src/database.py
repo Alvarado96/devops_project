@@ -27,11 +27,23 @@ if not os.environ.get('MYSQL_DB'):
 
 # Gets all properties from the database
 def select_all_properties():
-    mydb = _establish_connection()
-    mycursor = mydb.cursor()
-    mycursor.execute("SELECT * FROM properties")
-    myresult = mycursor.fetchall()
-    return _to_dict(mycursor, myresult)
+    mydb, mycursor = None, None
+    try:
+        mydb = _establish_connection()
+        mycursor = mydb.cursor()
+        mycursor.execute("SELECT * FROM properties")
+        myresult = mycursor.fetchall()
+        return _to_dict(mycursor, myresult)
+    except mysql.connector.Error as err:
+        print('DB ERROR: select_all_properties: {}'.format(err)) 
+    except Exception as err:
+        print('SERVER ERROR: select_all_properties: {}'.format(err))
+    finally:
+        if (mydb):
+            mydb.close()
+        if (mycursor):
+            mycursor.close()
+    return None
 
 
 # Method used to handle inserting a new query entry
