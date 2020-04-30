@@ -18,14 +18,15 @@ curl-test:
     - chmod u+x test_driver.sh
     - touch properties.db
     - sqlite3 properties.db < ../../mkdb.txt
-    - python3 ../../src/main.py -p 12185 &> junk.txt &
+    - python3 ../../src/main.py -p 12185 > stdout.txt 2> stderr.txt &
     - ./test_driver.sh localhost 12185 $!
 
 deploy-app:
   stage: deploy
   script:
-    - echo "Deploying service"
-    - echo "$MY_KEY" > key.txt
-    - chmod 600 key.txt
-    - scp -i key.txt -r ./src/*.py ddd233@cs47832.fulgentcorp.com:/home/ddd233/service
-    - scp -i key.txt -r ./static/*.yaml ddd233@cs47832.fulgentcorp.com:/home/ddd233/service/static
+    - echo "NO MORE DEPLOY!!!"
+    #- echo "Deploying service"
+    #- echo "$MY_KEY" > key.txt
+    #- chmod 600 key.txt
+    #- scp -i key.txt -r ./src/*.py ddd233@cs47832.fulgentcorp.com:/home/ddd233/service
+    #- scp -i key.txt -r ./static/*.yaml ddd233@cs47832.fulgentcorp.com:/home/ddd233/service/static

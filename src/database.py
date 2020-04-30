@@ -4,21 +4,37 @@ from flask import Blueprint
 from main import app
 import mysql.connector
 import json
+import os
+import sys
+
+# Check that database environment variables are set
+if not os.environ.get('MYSQL_USER'):
+    print('No MySQL user name')
+    sys.exit(1)
+
+if not os.environ.get('MYSQL_PASSWORD'):
+    print('No MySQL password')
+    sys.exit(1)
+
+if not os.environ.get('MYSQL_HOST'):
+    print('No MySQL hostname')
+    sys.exit(1)
+
+if not os.environ.get('MYSQL_DB'):
+    print('No MySQL database name')
+    sys.exit(1)
 
 mydb = mysql.connector.connect(
-  host="easel2.fulgentcorp.com",
-  user="fgd806",
-  passwd="Evlv3h7MzBF30ay967IS",
-  database="fgd806"
+  host=os.environ.get('MYSQL_HOST'),
+  user=os.environ.get('MYSQL_USER'),
+  passwd=os.environ.get('MYSQL_PASSWORD'),
+  database=os.environ.get('MYSQL_DB')
 )
 
 def select_all_properties():
     mycursor = mydb.cursor()
-
     mycursor.execute("SELECT * FROM properties")
-
     myresult = mycursor.fetchall()
-
     return _to_dict(mycursor, myresult)
 
 # method used to handle inserting a new query entry

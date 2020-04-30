@@ -8,6 +8,7 @@ from status_codes import OK, CREATED, BAD_REQUEST,  \
 												 SERVER_ERROR
 import sys
 import argparse
+import os
 
 app = Flask(__name__)
 CORS(app)

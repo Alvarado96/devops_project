@@ -7,10 +7,10 @@
 # Names and order of all test scripts to run
 test_scripts=(
 	test_get_all.sh
-	test_get_by_id.sh
-	test_post.sh
-	test_put.sh
-	test_delete.sh
+	#test_get_by_id.sh
+	#test_post.sh
+	#test_put.sh
+	#test_delete.sh
 )
 
 if [ "$#" -ne 3 ]; then
@@ -46,5 +46,14 @@ done
 # Kill the server before exit
 kill -9 $3
 echo "Service killed..."
+
+sleep 1
+
+cat stdout.txt
+echo "================================="
+
+sleep 1
+
+cat stderr.txt
 
 exit $test_result
