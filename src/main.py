@@ -170,7 +170,7 @@ def goodbye():
 
 if __name__ == '__main__':
 	parser = argparse.ArgumentParser(description='Web service')
-	parser.add_argument('-i', type=str, default='127.0.0.1', dest='host', 
+	parser.add_argument('-i', type=str, default='0.0.0.0', dest='host', 
 						help='IP of service (default: localhost')
 	parser.add_argument('-p', type=int, default=12185, dest='port', 
 						help='Port of service (default: 12185)')
