@@ -1,0 +1,2 @@
+GRANT ANT ALL ON *.* to root@'db' IDENTIFIED BY 'password';
+FLUSH PRIVILEGES;

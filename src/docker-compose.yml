@@ -5,7 +5,7 @@ services:
     restart: always
     environment:
       - MYSQL_DATABASE=flask-db
-      - MYSQL_USER=user
+      - MYSQL_USER=root
       - MYSQL_PASSWORD=password
       - MYSQL_ROOT_PASSWORD=password
     ports:
@@ -17,7 +17,7 @@ services:
     build: .
     restart: always
     environment:
-      - MYSQL_USER=user
+      - MYSQL_USER=root
       - MYSQL_PASSWORD=password
       - MYSQL_DB=flask-db
       - MYSQL_HOST=db
