@@ -1,11 +1,16 @@
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'password' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+
+USE flask-db;
 CREATE TABLE properties(
 	id INT NOT NULL AUTO_INCREMENT,
 	address VARCHAR(200) NOT NULL,
-    city VARCHAR(50) NOT NULL,
-    state VARCHAR(2) NOT NULL,
-    zip VARCHAR(10) NOT NULL,
-    PRIMARY KEY (id)
+  city VARCHAR(50) NOT NULL,
+  state VARCHAR(2) NOT NULL,
+  zip VARCHAR(10) NOT NULL,
+  PRIMARY KEY (id)
 );
+
 INSERT INTO properties (address, city, state, zip) 
 VALUES("1111 One St.", "City One", "TX", "11111");
 INSERT INTO properties (address, city, state, zip)
@@ -18,5 +23,8 @@ INSERT INTO properties (address, city, state, zip)
 VALUES("5555 Five St.", "City Five", "TX", "55555");
 INSERT INTO properties (address, city, state, zip)
 VALUES("6666 Six St.", "City Six", "TX", "66666");
+<<<<<<< HEAD
 GRANT ANT ALL ON *.* to root@'%' IDENTIFIED BY 'password';
 FLUSH PRIVILEGES;
+=======
+>>>>>>> bf76ac2cfb25561ebb68a353ab86b627fa89e4a2
