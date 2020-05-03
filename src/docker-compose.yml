@@ -3,3 +3,21 @@ services:
   web-api:
     build: .
     network_mode: host
+
+#version: '2'
+#services:
+#  app:
+#    build: ./src
+#    links:
+#      - db
+#    ports:
+#      - "12185:12185"
+
+#  db:
+#    image: mysql:5.7
+#    ports:
+#      - "3306:3306"
+#    environment:
+#      MYSQL_ROOT_PASSWORD: root
+#    volumes:
+#      - init.sql:/docker-entrypoint-initdb.d/:ro 
