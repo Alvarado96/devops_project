@@ -2,3 +2,4 @@ __pycache__
 devops.zip
 src/*.pyc
 tests/unit_tests/*.pyc
+venv
