@@ -24,7 +24,6 @@ if not os.environ.get('MYSQL_DB'):
     print('No MySQL database name')
     sys.exit(1)
 
-
 # Gets all properties from the database
 def select_all_properties():
     mydb, mycursor = None, None
@@ -161,7 +160,7 @@ def _establish_connection():
       host=os.environ.get('MYSQL_HOST'),
       user=os.environ.get('MYSQL_USER'),
       passwd=os.environ.get('MYSQL_PASSWORD'),
-      database=os.environ.get('MYSQL_DB')
+      database=os.environ.get('MYSQL_DATABASE')
     )
     return mydb
 

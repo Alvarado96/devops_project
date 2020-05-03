@@ -1,0 +1,8 @@
+CREATE TABLE properties(
+	id INT NOT NULL AUTO_INCREMENT,
+	address VARCHAR(200) NOT NULL,
+    city VARCHAR(50) NOT NULL,
+    state VARCHAR(2) NOT NULL,
+    zip VARCHAR(10) NOT NULL,
+    PRIMARY KEY (id)
+);
