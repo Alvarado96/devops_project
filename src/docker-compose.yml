@@ -18,16 +18,14 @@ services:
     build: .
     restart: always
     environment:
-      - MYSQL_USER="user"
-      - MYSQL_PASSWORD="password"
-      - MYSQL_DATABASE="flask-db"
-      - MYSQL_HOST="db"
+      - MYSQL_USER="fgd806"
+      - MYSQL_PASSWORD="Evlv3h7MzBF30ay967IS"
+      - MYSQL_DATABASE="fgd806"
+      - MYSQL_HOST="easel2.fulgentcorp.com"
       - BITNAMI_DEBUG=true
-    links:
-      - db
+    
     depends_on:
       - "db"
-    ports:
-      - "12185:12185"
+    network_mode: host
     container_name: web-api
     hostname: web-api
