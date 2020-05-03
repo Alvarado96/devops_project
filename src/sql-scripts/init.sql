@@ -1,3 +1,16 @@
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'password' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+
+USE flask-db;
+CREATE TABLE properties(
+	id INT NOT NULL AUTO_INCREMENT,
+	address VARCHAR(200) NOT NULL,
+  city VARCHAR(50) NOT NULL,
+  state VARCHAR(2) NOT NULL,
+  zip VARCHAR(10) NOT NULL,
+  PRIMARY KEY (id)
+);
+
 INSERT INTO properties (address, city, state, zip) 
 VALUES("1111 One St.", "City One", "TX", "11111");
 INSERT INTO properties (address, city, state, zip)
