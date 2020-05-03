@@ -1,5 +1,33 @@
 version: '3'
 services:
+
+  db:
+    build: ./sql-scripts/
+    restart: always
+    environment:
+        MYSQL_DATABASE: 'flask-db'
+        MYSQL_USER: 'user'
+        MYSQL_PASSWORD: 'password'
+        MYSQL_ROOT_PASSWORD: 'password'
+    ports:
+      - "3306:3306"
+    container_name: db
+    hostname: db
+
   web-api:
     build: .
-    network_mode: host
+    restart: always
+    environment:
+      - MYSQL_USER="user"
+      - MYSQL_PASSWORD="password"
+      - MYSQL_DATABASE="flask-db"
+      - MYSQL_HOST="db"
+      - BITNAMI_DEBUG=true
+    links:
+      - db
+    depends_on:
+      - "db"
+    ports:
+      - "12185:12185"
+    container_name: web-api
+    hostname: web-api

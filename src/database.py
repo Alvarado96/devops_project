@@ -1,5 +1,4 @@
 from flask import Flask
-from flask_mysqldb import MySQL
 from flask import Blueprint
 from main import app
 import mysql.connector
@@ -25,10 +24,11 @@ if not os.environ.get('MYSQL_DB'):
     sys.exit(1)
 
 mydb = mysql.connector.connect(
-  host=os.environ.get('MYSQL_HOST'),
-  user=os.environ.get('MYSQL_USER'),
-  passwd=os.environ.get('MYSQL_PASSWORD'),
-  database=os.environ.get('MYSQL_DB')
+  host='localhost',#os.environ.get('MYSQL_HOST'),
+  port='3306',
+  user='user',#os.environ.get('MYSQL_USER'),
+  passwd='password',#os.environ.get('MYSQL_PASSWORD'),
+  database='flask-db'#os.environ.get('MYSQL_DATABASE')
 )
 
 def select_all_properties():
