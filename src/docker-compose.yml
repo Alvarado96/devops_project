@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 services:
   db:
     build: ./sql-scripts/
@@ -22,11 +22,9 @@ services:
       - MYSQL_DB=flask-db
       - MYSQL_HOST=db
       - BITNAMI_DEBUG=true
-    links:
-      - db
+    
     depends_on:
       - "db"
-    ports:
-      - "12185:12185"
+    network_mode: host
     container_name: web-api
     hostname: web-api
