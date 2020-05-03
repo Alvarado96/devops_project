@@ -18,5 +18,5 @@ INSERT INTO properties (address, city, state, zip)
 VALUES("5555 Five St.", "City Five", "TX", "55555");
 INSERT INTO properties (address, city, state, zip)
 VALUES("6666 Six St.", "City Six", "TX", "66666");
-GRANT ANT ALL ON *.* to root@'db' IDENTIFIED BY 'password';
+GRANT ANT ALL ON *.* to root@'%' IDENTIFIED BY 'password';
 FLUSH PRIVILEGES;
