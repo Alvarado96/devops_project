@@ -34,9 +34,9 @@ def select_all_properties():
         myresult = mycursor.fetchall()
         return _to_dict(mycursor, myresult)
     except mysql.connector.Error as err:
-        print('DB ERROR: select_all_properties: {}'.format(err)) 
+        print('DB ERROR: select_all_properties: {}'.format(err), file=sys.stderr)
     except Exception as err:
-        print('SERVER ERROR: select_all_properties: {}'.format(err))
+        print('SERVER ERROR: select_all_properties: {}'.format(err), file=sys.stderr)
     finally:
         if mydb:
             mydb.close()
@@ -160,7 +160,7 @@ def _establish_connection():
       host=os.environ.get('MYSQL_HOST'),
       user=os.environ.get('MYSQL_USER'),
       passwd=os.environ.get('MYSQL_PASSWORD'),
-      database=os.environ.get('MYSQL_DATABASE')
+      database=os.environ.get('MYSQL_DB')
     )
     return mydb
 
