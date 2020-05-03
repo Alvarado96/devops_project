@@ -8,6 +8,7 @@ services:
       - MYSQL_USER=root
       - MYSQL_PASSWORD=password
       - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_ROOT_HOST=%
     ports:
       - "33006:3306"
     container_name: db
