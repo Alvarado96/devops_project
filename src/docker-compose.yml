@@ -1,15 +1,10 @@
-version: '2'
+web-api:
+  build: .
+  command: python main.py
+  ports:
+    - '12185:12185'
+  links:
+    - db
 
-services:
-  web-api:
-    build: .
-
-  mongo:
-    image: mongo:3-xenial
-    container_name: 'api_db'
-    restart: always
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: 'root'
-      MONGO_INITDB_ROOT_PASSWORD: 'root'
-    ports:
-      - 27017:27027
+db:
+  image: mongo:3-xenial
