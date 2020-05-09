@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 version: '3'
 services:
   db:
@@ -27,3 +28,15 @@ services:
     network_mode: host
     container_name: web-api
     hostname: web-api
+=======
+web-api:
+  build: .
+  command: python main.py
+  ports:
+    - '12185:12185'
+  links:
+    - db
+
+db:
+  image: mongo:3-xenial
+>>>>>>> e4290b8435ea4f4f497e7a16df02053d61706861
