@@ -9,14 +9,18 @@ from status_codes import OK, CREATED, BAD_REQUEST,  \
 import sys
 import argparse
 import os
+from pymongo import MongoClient
+from bson.json_util import dumps
 
 app = Flask(__name__)
 CORS(app)
+
 
 # swagger ui path
 @app.route('/static/<path:path>')
 def send_static(path):
 	return send_from_directory('static', path)
+
 
 SWAGGER_URL = '/swagger'
 API_URL = '/static/swagger.yaml'
@@ -30,13 +34,20 @@ swaggerui_blueprint = get_swaggerui_blueprint(
 app.register_blueprint(swaggerui_blueprint, url_prefix=SWAGGER_URL)
 
 
+# Setup mongodb connection
+client = MongoClient(
+    os.environ['DB_PORT_27017_TCP_ADDR'],
+	27017
+)
+db = client.properties
+
+
 # get_all_properties() returns all rows in the database in json form
 @app.route('/properties', methods=['GET'])
 def get_all_properties():
-	rows = db_sql.select_all_properties()
-	if not rows:
-		return jsonify({'message':'not found'}), NOT_FOUND
-	return jsonify(rows), OK
+	props = db.properties.find()
+	props = [prop for prop in props]
+	return dumps(props), OK
 
 
 # delete_property(id) removes a row in the database specified by the id
@@ -100,10 +111,13 @@ def insert_property():
 	if err_msg:
 		return jsonify({'message':err_msg.strip()}), BAD_REQUEST
 
-	rows_affected = db_sql.insert_property((address, state, city, zip_code))
-	if rows_affected == -1:
-		return jsonify({'message':'there was an error, try later'}), SERVER_ERROR
-	
+	prop_doc = {
+		'address': address,
+		'state': state,
+		'city': city,
+		'zip': zip_code,
+	}
+	db.properties.insert_one(prop_doc)
 	return jsonify([{'message':'added'}]), CREATED
 
 
@@ -169,9 +183,8 @@ def goodbye():
 
 
 if __name__ == '__main__':
-  print(os.environ.get('HELLO_WORLD'))
 	parser = argparse.ArgumentParser(description='Web service')
-	parser.add_argument('-i', type=str, default='127.0.0.1', dest='host', 
+	parser.add_argument('-i', type=str, default='0.0.0.0', dest='host', 
 						help='IP of service (default: localhost')
 	parser.add_argument('-p', type=int, default=12185, dest='port', 
 						help='Port of service (default: 12185)')

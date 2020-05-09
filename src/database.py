@@ -1,16 +1,18 @@
 from flask import Flask
-from flask_mysqldb import MySQL
+#from flask_mysqldb import MySQL
 from flask import Blueprint
 from main import app
 
 
+'''
 app.config['MYSQL_USER'] = 'fgd806'
 app.config['MYSQL_PASSWORD'] = 'Evlv3h7MzBF30ay967IS'
 app.config['MYSQL_HOST'] = 'easel2.fulgentcorp.com'
 app.config['MYSQL_DB'] = 'fgd806'
 app.config['MYSQL_CURSORCLASSS'] = 'DictCursor'
+'''
 
-mysql = MySQL(app)
+#mysql = MySQL(app)
 
 # method handles the query for getting all entries in the database
 def select_all_properties():
