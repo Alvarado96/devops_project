@@ -160,7 +160,7 @@ def _establish_connection():
       host=os.environ.get('MYSQL_HOST'),
       user=os.environ.get('MYSQL_USER'),
       passwd=os.environ.get('MYSQL_PASSWORD'),
-      database=os.environ.get('MYSQL_DB')
+      database=os.environ.get('MYSQL_DB'),
     )
     return mydb
 

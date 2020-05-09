@@ -17,12 +17,11 @@ services:
     build: .
     restart: always
     environment:
-      - MYSQL_USER=user
+      - MYSQL_USER=myuser
       - MYSQL_PASSWORD=password
       - MYSQL_DB=flask-db
-      - MYSQL_HOST=localhost
+      - MYSQL_HOST=db
       - BITNAMI_DEBUG=true
-    
     depends_on:
       - "db"
     network_mode: host

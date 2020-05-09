@@ -1,6 +1,7 @@
 FROM mysql
 
+ENV MYSQL_DATABASE flask-db
 EXPOSE 3306
 
-COPY init.sql /docker-entrypoint-initdb.d/
+COPY . /docker-entrypoint-initdb.d/
 
