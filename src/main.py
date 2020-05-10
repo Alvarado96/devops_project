@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from flask_swagger_ui import get_swaggerui_blueprint
-import database as db_sql
+
 import utils
 from status_codes import OK, CREATED, BAD_REQUEST,  \
                          UNAUTHORIZED, NOT_FOUND,   \
@@ -39,13 +39,23 @@ client = MongoClient(
     os.environ['DB_PORT_27017_TCP_ADDR'],
 	27017
 )
+
 db = client.properties
+
+# check if counters collection has a userid entry
+# if not then create one which will be incremented
+if not db.origid_counter.find({'_id':"userid"}):
+    db.origid_counter.insert_one({'_id': "userid", 'seq': 0})
+
+# getNextSequence updates the userid field by incrementing by 1
+def getNextSequence(collection,name):  
+   return collection.find_and_modify(query= { '_id': name },update= { '$inc': {'seq': 1}}, new=True ).get('seq');
 
 
 # get_all_properties() returns all rows in the database in json form
 @app.route('/properties', methods=['GET'])
 def get_all_properties():
-	props = db.properties.find()
+	props = db.properties.find({}, {"_id": 0})
 	props = [prop for prop in props]
 	return dumps(props), OK
 
@@ -112,6 +122,7 @@ def insert_property():
 		return jsonify({'message':err_msg.strip()}), BAD_REQUEST
 
 	prop_doc = {
+	    'id': getNextSequence(db.origid_counter,"userid"),
 		'address': address,
 		'state': state,
 		'city': city,
