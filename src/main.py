@@ -10,6 +10,7 @@ import argparse
 import os
 from pymongo import MongoClient
 from bson.json_util import dumps
+from bson import ObjectId
 
 app = Flask(__name__)
 CORS(app)
@@ -70,13 +71,12 @@ def delete_property(id):
 # get_id_properties(id) returns a row in json form specified by the id
 @app.route('/properties/<string:id>', methods=['GET'])
 def get_id_properties(id):
-	if not utils.is_integer(id):
-		return jsonify({'message':'id not an integer'}), BAD_REQUEST
-
-	row = db_sql.select_property(id)
-	if not row:
+	props = db.properties.find({"_id": ObjectId(str(id))})
+	if not props:
 		return jsonify({'message':'not found'}), NOT_FOUND
-	return jsonify(row[0]), OK
+	props = [prop for prop in props]
+	return dumps(props), OK
+	
 
 	
 # insert_property() inserts a new entry into the database
