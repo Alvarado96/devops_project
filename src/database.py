@@ -1,4 +1,5 @@
 from flask import Flask
+
 from flask import Blueprint
 from main import app
 import mysql.connector
@@ -7,13 +8,6 @@ import os
 import sys
 
 
-if not os.environ.get('MYSQL_HOST'):
-    print('No MySQL hostname')
-    sys.exit(1)
-
-if not os.environ.get('MYSQL_DB'):
-    print('No MySQL database name')
-    sys.exit(1)
 
 # Gets all properties from the database
 def select_all_properties():
