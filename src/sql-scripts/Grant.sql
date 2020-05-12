@@ -1,2 +1,0 @@
-GRANT ANT ALL ON *.* to root@'%' IDENTIFIED BY 'password';
-FLUSH PRIVILEGES;
