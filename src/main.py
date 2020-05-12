@@ -54,13 +54,10 @@ def get_all_properties():
 # delete_property(id) removes a row in the database specified by the id
 @app.route('/properties/<string:id>', methods=['DELETE'])
 def delete_property(id):
-	if not utils.is_integer(id):
-		return jsonify({'message':'id not an integer'}), BAD_REQUEST
-
 	if utils.has_invalid_or_missing_key(request.headers):
 		return jsonify({'message':'missing or invalid key'}), UNAUTHORIZED
 	
-	rows_affected = db_sql.delete_property(id)
+	rows_affected = db.properties.delete_one({ "_id" : ObjectId(str(id))});
 	if rows_affected == -1:
 		return jsonify({'message':'error'}), SERVER_ERROR
 	elif rows_affected == 0:
