@@ -1,8 +1,4 @@
 from flask import Flask
-<<<<<<< HEAD
-=======
-#from flask_mysqldb import MySQL
->>>>>>> e4290b8435ea4f4f497e7a16df02053d61706861
 from flask import Blueprint
 from main import app
 import mysql.connector
@@ -10,27 +6,6 @@ import json
 import os
 import sys
 
-
-<<<<<<< HEAD
-# Check that database environment variables are set
-if not os.environ.get('MYSQL_USER'):
-    print('No MySQL user name')
-    sys.exit(1)
-
-if not os.environ.get('MYSQL_PASSWORD'):
-    print('No MySQL password')
-    sys.exit(1)
-=======
-'''
-app.config['MYSQL_USER'] = 'fgd806'
-app.config['MYSQL_PASSWORD'] = 'Evlv3h7MzBF30ay967IS'
-app.config['MYSQL_HOST'] = 'easel2.fulgentcorp.com'
-app.config['MYSQL_DB'] = 'fgd806'
-app.config['MYSQL_CURSORCLASSS'] = 'DictCursor'
-'''
-
-#mysql = MySQL(app)
->>>>>>> e4290b8435ea4f4f497e7a16df02053d61706861
 
 if not os.environ.get('MYSQL_HOST'):
     print('No MySQL hostname')
