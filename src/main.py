@@ -74,7 +74,6 @@ def get_id_properties(id):
 	props = [prop for prop in props]
 	return dumps(props), OK
 	
-
 	
 # insert_property() inserts a new entry into the database
 @app.route('/properties', methods=['POST'])
