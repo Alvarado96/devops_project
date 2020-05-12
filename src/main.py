@@ -36,7 +36,7 @@ app.register_blueprint(swaggerui_blueprint, url_prefix=SWAGGER_URL)
 
 # Setup mongodb connection
 client = MongoClient(
-    os.environ['DB_PORT_27017_TCP_ADDR'],
+    os.environ['DDD233_DB_PORT_27017_TCP_ADDR'],
 	27017
 )
 

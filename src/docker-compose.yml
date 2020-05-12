@@ -1,10 +1,10 @@
-web-api:
+ddd233-web-api:
   build: .
   command: python main.py
   ports:
     - '12185:12185'
   links:
-    - db
+    - ddd233-db
 
-db:
+ddd233-db:
   image: mongo:3-xenial
