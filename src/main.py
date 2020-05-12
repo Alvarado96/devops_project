@@ -158,7 +158,6 @@ def put_id_properties(id):
 		return jsonify({'message':err_msg.strip()}), BAD_REQUEST
     
 	new_values = {"$set": {"address": address, "state": state, "city": city, "zip": zip_code}}
-	#row = db_sql.update_property(id, address, city, state, zip_code)
 	row = db.properties.update_one({"_id": ObjectId(str(id))},new_values)
 
 	if not row:
