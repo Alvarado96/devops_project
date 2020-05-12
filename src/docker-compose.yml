@@ -1,34 +1,3 @@
-<<<<<<< HEAD
-version: '3'
-services:
-  db:
-    build: ./sql-scripts/
-    restart: always
-    environment:
-      - MYSQL_DATABASE=flask-db
-      - MYSQL_USER=user
-      - MYSQL_PASSWORD=password
-      - MYSQL_ROOT_PASSWORD=password
-    ports:
-      - "33006:3306"
-    container_name: db
-    hostname: db
-
-  web-api:
-    build: .
-    restart: always
-    environment:
-      - MYSQL_USER=myuser
-      - MYSQL_PASSWORD=password
-      - MYSQL_DB=flask-db
-      - MYSQL_HOST=db
-      - BITNAMI_DEBUG=true
-    depends_on:
-      - "db"
-    network_mode: host
-    container_name: web-api
-    hostname: web-api
-=======
 web-api:
   build: .
   command: python main.py
@@ -39,4 +8,3 @@ web-api:
 
 db:
   image: mongo:3-xenial
->>>>>>> e4290b8435ea4f4f497e7a16df02053d61706861

@@ -1,7 +1,6 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from flask_swagger_ui import get_swaggerui_blueprint
-
 import utils
 from status_codes import OK, CREATED, BAD_REQUEST,  \
                          UNAUTHORIZED, NOT_FOUND,   \
@@ -46,6 +45,7 @@ db = client.properties
 # if not then create one which will be incremented
 if not db.origid_counter.find({'_id':"userid"}):
     db.origid_counter.insert_one({'_id': "userid", 'seq': 0})
+
 
 # getNextSequence updates the userid field by incrementing by 1
 def getNextSequence(collection,name):  
