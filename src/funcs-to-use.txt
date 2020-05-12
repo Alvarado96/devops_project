@@ -1,0 +1,5 @@
+insert_one() = POST
+find_one()   = GET BY ID
+find()       = GET ALL
+update_one() = PUT
+delete_one() = DELETE
