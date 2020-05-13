@@ -36,7 +36,7 @@ app.register_blueprint(swaggerui_blueprint, url_prefix=SWAGGER_URL)
 
 # Setup mongodb connection
 client = MongoClient(
-    os.environ['DB_PORT_27017_TCP_ADDR'],
+    os.environ['DDD233_DB_PORT_27017_TCP_ADDR'],
 	27017
 )
 
@@ -88,7 +88,6 @@ def get_id_properties(id):
 	props = [prop for prop in props]
 	return dumps(props), OK
 	
-
 	
 # insert_property() inserts a new entry into the database
 @app.route('/properties', methods=['POST'])
@@ -172,7 +171,6 @@ def put_id_properties(id):
 		return jsonify({'message':err_msg.strip()}), BAD_REQUEST
     
 	new_values = {"$set": {"address": address, "state": state, "city": city, "zip": zip_code}}
-	#row = db_sql.update_property(id, address, city, state, zip_code)
 	row = db.properties.update_one({"_id": ObjectId(str(id))},new_values)
 
 	if not row:
