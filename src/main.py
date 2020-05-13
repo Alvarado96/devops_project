@@ -41,7 +41,21 @@ client = MongoClient(
 )
 
 db = client.properties
-
+db.properties.drop()
+db.properties.insert_many([
+  {
+  "address": "410 E Huff",
+  "city": "San Antonio",
+  "state": "TX",
+  "zip": "11111"
+  },
+  {
+    "address": "21st Street",
+  "city": "Houston",
+  "state": "TX",
+  "zip": "22222"
+  }
+])
 
 # get_all_properties() returns all rows in the database in json form
 @app.route('/properties', methods=['GET'])
