@@ -35,10 +35,7 @@ app.register_blueprint(swaggerui_blueprint, url_prefix=SWAGGER_URL)
 
 
 # Setup mongodb connection
-client = MongoClient(
-    os.environ['DDD233_DB_PORT_27017_TCP_ADDR'],
-	27017
-)
+client = MongoClient('ddd233-db', 27017)
 
 db = client.properties
 db.properties.drop()
@@ -50,12 +47,13 @@ db.properties.insert_many([
   "zip": "11111"
   },
   {
-    "address": "21st Street",
+  "address": "21st Street",
   "city": "Houston",
   "state": "TX",
   "zip": "22222"
   }
 ])
+
 
 # get_all_properties() returns all rows in the database in json form
 @app.route('/properties', methods=['GET'])

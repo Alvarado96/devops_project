@@ -7,5 +7,6 @@ ddd233-web-api:
     - ddd233-db
 
 ddd233-db:
+  container_name: ddd233-db
   image: mongo:3-xenial
 
