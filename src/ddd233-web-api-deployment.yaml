@@ -33,7 +33,7 @@ spec:
         ports:
         - containerPort: 12185
         resources: {}
-      restartPolicy: Always
+      restartPolicy: Never
       serviceAccountName: ""
       volumes: null
 status: {}
