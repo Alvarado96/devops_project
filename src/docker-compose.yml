@@ -1,16 +1,17 @@
-
+version: "3"
+services:
   ddd233-web-api:
-    image: cs4783registry.azurecr.io/ddd233-api:latest
+    image: cs4783registry.azurecr.io/ddd233-web-api:latest
     command: python main.py
     ports:
       - '12185:12185'
     links:
       - ddd233-db
-    hostname: ddd233-web-api
-    
 
   ddd233-db:
-    image: cs4783registry.azurecr.io/ddd233-db:latest
+    container_name: ddd233-db
+    ports:
+      - "12186:27017"
+    image: cs4783registry.azurecr.io/ddd233-db:latest 
 
-    hostname: ddd233-db
 
