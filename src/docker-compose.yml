@@ -1,7 +1,7 @@
-version: "3"
+version: '2'
 services:
   ddd233-web-api:
-    image: cs4783registry.azurecr.io/ddd233-web-api:latest
+    build: .
     command: python main.py
     ports:
       - '12185:12185'
@@ -9,9 +9,6 @@ services:
       - ddd233-db
 
   ddd233-db:
-    container_name: ddd233-db
+    build: mongo/.
     ports:
-      - "12186:27017"
-    image: cs4783registry.azurecr.io/ddd233-db:latest 
-
-
+      - "27017:27017"
