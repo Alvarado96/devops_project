@@ -4,7 +4,7 @@ from flask_swagger_ui import get_swaggerui_blueprint
 import utils
 from status_codes import OK, CREATED, BAD_REQUEST,  \
                          UNAUTHORIZED, NOT_FOUND,   \
-												 SERVER_ERROR
+						 SERVER_ERROR
 import sys
 import argparse
 import os
