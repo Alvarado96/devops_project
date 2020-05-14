@@ -21,4 +21,7 @@ deploy-app:
     - az login --service-principal -u $APP_ID -p $PW --tenant $TENANT
     - az aks get-credentials --resource-group cs4783ResourceGroup --name cs4783Cluster
     - az acr login --name cs4783registry
+    - docker build -t cs4783registry.azurecr.io/ddd233-web-api .
+    - docker push cs4783registry.azurecr.io/ddd233-web-api:latest
+    - kubectl apply -f ddd233-web-api-deployment.yaml,ddd233-db-deployment.yaml
     - az logout
