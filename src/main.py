@@ -192,7 +192,7 @@ def new_ep():
 	return jsonify([{'message':'new!!'}])
 
 @app.route('/old')
-def new_ep():
+def old_ep():
 	return jsonify([{'message':'YOUR OLD!!'}])
 
 
