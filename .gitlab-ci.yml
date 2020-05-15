@@ -24,7 +24,8 @@ deploy-app:
     - az acr login --name cs4783registry
     - docker build -t cs4783registry.azurecr.io/ddd233-web-api src/.
     - docker push cs4783registry.azurecr.io/ddd233-web-api:latest
-    - kubectl apply -f src/ddd233-web-api-deployment.yaml,src/ddd233-db-deployment.yaml
+    - kubectl apply -f src/ddd233-web-api-deployment.yaml,src/ddd233-db-deployment.yaml,
+                       src/ddd233-web-api-service.yaml,src/ddd233-db-service.yaml
     - kubectl set image deployment ddd233-web-api ddd233-web-api=cs4783registry.azurecr.io/ddd233-web-api:latest
     - kubectl set image deployment ddd233-web-api ddd233-web-api=cs4783registry.azurecr.io/ddd233-web-api
     - az logout
