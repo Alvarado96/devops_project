@@ -9,7 +9,7 @@ info:
     name: MIT
     url: 'https://opensource.org/licenses/MIT'
 servers:
-  - url: http://20.185.14.156:12185/
+  - url: http://52.191.36.33:12185/
   - url: https://cs47832.fulgentcorp.com:12185/
 tags:
   - name: Properties Request
