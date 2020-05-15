@@ -13,6 +13,7 @@ curl-test:
   stage: curl_test
   script: 
     - echo 'Skipping...'
+    
 
 deploy-app:
   stage: deploy

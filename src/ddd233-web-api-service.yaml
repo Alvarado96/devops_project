@@ -9,6 +9,7 @@ metadata:
     io.kompose.service: ddd233-web-api
   name: ddd233-web-api
 spec:
+  type: LoadBalancer
   ports:
   - name: "12185"
     port: 12185

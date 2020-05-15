@@ -35,7 +35,7 @@ app.register_blueprint(swaggerui_blueprint, url_prefix=SWAGGER_URL)
 
 #hello
 # Setup mongodb connection
-client = MongoClient('ddd233-db', 12186)
+client = MongoClient('ddd233-db', 27017)
 db = client.properties
 db.properties.drop()
 db.properties.insert_many([
