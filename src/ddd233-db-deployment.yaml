@@ -24,7 +24,7 @@ spec:
         io.kompose.service: ddd233-db
     spec:
       containers:
-      - image: cs4783registry.azurecr.io/ddd233-db
+      - image: cs4783registry.azurecr.io/ddd233-db:latest
         imagePullPolicy: ""
         name: ddd233-db
         ports:
