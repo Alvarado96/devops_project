@@ -189,7 +189,7 @@ def goodbye():
 
 @app.route('/new')
 def new_ep():
-	return jsonfiy(['message':'new endpoint'}])
+	return jsonify([{'message':'new!!'}])
 
 
 if __name__ == '__main__':
