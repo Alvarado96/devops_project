@@ -23,7 +23,7 @@ def send_static(path):
 
 
 SWAGGER_URL = '/swagger'
-API_URL = '/static/swagger.yaml'
+API_URL = './static/swagger.yaml'
 swaggerui_blueprint = get_swaggerui_blueprint(
 	SWAGGER_URL,
 	API_URL,
