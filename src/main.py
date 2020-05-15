@@ -187,6 +187,11 @@ def goodbye():
 	return jsonify([{'message':'goodbye yourself'}])
 
 
+@app.route('/new')
+def new_ep():
+	return jsonfiy(['message':'new endpoint'}])
+
+
 if __name__ == '__main__':
 	parser = argparse.ArgumentParser(description='Web service')
 	parser.add_argument('-i', type=str, default='0.0.0.0', dest='host', 
