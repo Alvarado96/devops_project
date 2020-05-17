@@ -179,7 +179,7 @@ def put_id_properties(id):
 # hello() function created for testing purposes
 @app.route('/hello')
 def hello():
-	return jsonify([{"message":"hello yourself"}])
+	return jsonify([{"message":"hello yourself v2"}])
 
 
 @app.route('/goodbye')
